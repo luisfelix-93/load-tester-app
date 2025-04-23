@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",          // puxa baseUrl e paths
+  "compilerOptions": {
+    "jsx": "react-jsx",                  // necessário para React 18+
+    "moduleResolution": "node",          // garante resolução de módulos
+    "strict": true                       // (opcional) seu nível de rigor
+  },
+  "include": ["src"],                    // aponta pro seu código-fonte
+  "exclude": ["node_modules", "dist"]    // bom hábito
+}
