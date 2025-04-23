@@ -24,7 +24,7 @@ jobs:
             const baseBranch = 'main';
 
             // Ignorar branch main e branches de tags
-            // teste
+            // 
             if (branch === baseBranch || GITHUB_REF.startsWith('refs/tags/')) {
               console.log(`Branch ${branch} ignorada.`);
               return;
