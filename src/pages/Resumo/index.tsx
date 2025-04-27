@@ -25,6 +25,11 @@ export default function Resumo() {
 
   const { url, requests, concurrency, stats, result } = data
 
+  // Função utilitária para evitar erro de null
+  const formatValue = (value: number | null) => {
+    return value !== null ? value.toFixed(3) : '-'
+  }
+
   return (
     <div className="p-6 space-y-6">
       <h1 className="text-2xl font-bold">Resumo do Teste</h1>
@@ -49,31 +54,32 @@ export default function Resumo() {
             <h3 className="font-semibold mb-2">Status</h3>
             <p><strong>Sucesso:</strong> {stats.successCount}</p>
             <p><strong>Falhas:</strong> {stats.failedCount}</p>
-            <p><strong>Requests por segundo:</strong> {stats.requestsPerSecond.toFixed(2)}</p>
+            <p><strong>Requests por segundo:</strong> {stats.requestsPerSecond?.toFixed(2)}</p>
           </div>
 
           <div>
             <h3 className="font-semibold mb-2">Tempo Total</h3>
             <p><strong>Mínimo:</strong> {stats.totalTime.min}s</p>
-            <p><strong>Médio:</strong> {stats.totalTime.avg.toFixed(3)}s</p>
+            <p><strong>Médio:</strong> {formatValue(stats.totalTime.avg)}s</p>
             <p><strong>Máximo:</strong> {stats.totalTime.max}s</p>
           </div>
 
           <div>
             <h3 className="font-semibold mb-2">Time to First Byte</h3>
-            <p><strong>Mínimo:</strong> {stats.timeToFirstByte.min}s</p>
-            <p><strong>Médio:</strong> {stats.timeToFirstByte.avg.toFixed(3)}s</p>
-            <p><strong>Máximo:</strong> {stats.timeToFirstByte.max}s</p>
+            <p><strong>Mínimo:</strong> {stats.timeToFirstByte.min !== null ? `${stats.timeToFirstByte.min}s` : '-'}</p>
+            <p><strong>Médio:</strong> {formatValue(stats.timeToFirstByte.avg)}s</p>
+            <p><strong>Máximo:</strong> {stats.timeToFirstByte.max !== null ? `${stats.timeToFirstByte.max}s` : '-'}</p>
           </div>
 
           <div>
             <h3 className="font-semibold mb-2">Time to Last Byte</h3>
-            <p><strong>Mínimo:</strong> {stats.timeToLastByte.min}s</p>
-            <p><strong>Médio:</strong> {stats.timeToLastByte.avg.toFixed(3)}s</p>
-            <p><strong>Máximo:</strong> {stats.timeToLastByte.max}s</p>
+            <p><strong>Mínimo:</strong> {stats.timeToLastByte.min !== null ? `${stats.timeToLastByte.min}s` : '-'}</p>
+            <p><strong>Médio:</strong> {formatValue(stats.timeToLastByte.avg)}s</p>
+            <p><strong>Máximo:</strong> {stats.timeToLastByte.max !== null ? `${stats.timeToLastByte.max}s` : '-'}</p>
           </div>
         </CardContent>
       </Card>
+
       <Card>
         <CardHeader>
           <CardTitle>Gráficos do Teste</CardTitle>
@@ -88,8 +94,7 @@ export default function Resumo() {
             <ResponseTimeChart result={result} />
           </div>
         </CardContent>
-</Card>
-
+      </Card>
     </div>
   )
 }
