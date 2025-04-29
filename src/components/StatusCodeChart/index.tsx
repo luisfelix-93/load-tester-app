@@ -10,7 +10,6 @@ import {
   Legend,
 } from 'chart.js';
 
-
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 interface ResultItem {
@@ -20,24 +19,36 @@ interface ResultItem {
 }
 
 interface Props {
-  result: ResultItem[]; // array com { n, codeStatus, responseTime }
+  result: ResultItem[];
 }
+
+// Função para definir cores por status code
+const getColorByStatusCode = (code: number): string => {
+  if (code === 500) return '#ef4444'; // vermelho
+  if (code === 408) return '#10b981'; // verde
+  if (code === 200) return '#3b82f6'; // azul
+  return '#6b7280'; // cinza padrão
+};
 
 export default function StatusCodeChart({ result }: Props) {
   const statusCounts: Record<number, number> = {};
 
-  // Agrupa os statusCodes e soma quantas vezes cada um apareceu
+  // Agrupa status codes
   result.forEach(({ codeStatus }) => {
     statusCounts[codeStatus] = (statusCounts[codeStatus] || 0) + 1;
   });
 
+  const labels = Object.keys(statusCounts);
+  const values = Object.values(statusCounts);
+  const backgroundColors = labels.map((label) => getColorByStatusCode(Number(label)));
+
   const chartData = {
-    labels: Object.keys(statusCounts), // ['200', '404', ...]
+    labels,
     datasets: [
       {
         label: 'Quantidade de Respostas',
-        data: Object.values(statusCounts), // [80, 15, ...]
-        backgroundColor: '#3b82f6',
+        data: values,
+        backgroundColor: backgroundColors,
         borderRadius: 6,
       },
     ],

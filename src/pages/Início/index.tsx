@@ -28,13 +28,16 @@ const Inicio = () => {
     try {
       setLoading(true);
       const result = await createTest(formData);
-      if(result._id) {
-        navigate(`/resumo/${result._id}`);
+      if (result && result._id) {
+        // Redireciona para a tela de loading passando o ID do teste
+        navigate(`/loading/${result._id}`);
+      } else {
+        // Caso não tenha _id, redireciona para erro
+        navigate("/error");
       }
-      console.log('Resultado do teste:', result);
-      // Aqui pode colocar um feedback visual
     } catch (err) {
       console.error('Erro ao enviar formulário:', err);
+      navigate("/error");
     } finally {
       setLoading(false);
     }
