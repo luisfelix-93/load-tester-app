@@ -4,6 +4,8 @@ import { getTestResults } from "@/api/loadtester"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import ResponseTimeChart from "@/components/ResponseTimeChart"
 import StatusCodeChart from "@/components/StatusCodeChart"
+import { saveAs } from "file-saver"
+import { Button } from "@/components/ui/button"
 
 export default function DetalheResumo() {
   const { testId } = useParams()
@@ -24,6 +26,14 @@ export default function DetalheResumo() {
   if (!data) return <p className="text-center mt-8 text-red-500">Resultados não encontrados.</p>
 
   const { url, requests, concurrency, stats, result } = data
+
+  const exportToJson = (data: any, testId: string) => {
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+    saveAs(blob, `load-test-${testId}.json`);
+  }
+
+  const formatNumber = (value: number | null | undefined, decimals = 2) =>
+    typeof value === "number" ? value.toFixed(decimals) : "N/A";
 
   return (
     <div className="p-6 space-y-6">
@@ -49,27 +59,27 @@ export default function DetalheResumo() {
             <h3 className="font-semibold mb-2">Status</h3>
             <p><strong>Sucesso:</strong> {stats.successCount}</p>
             <p><strong>Falhas:</strong> {stats.failedCount}</p>
-            <p><strong>Requests por segundo:</strong> {stats.requestsPerSecond.toFixed(2)}</p>
+            <p><strong>Requests por segundo:</strong> {formatNumber(stats.requestsPerSecond)}</p>
           </div>
 
           <div>
             <h3 className="font-semibold mb-2">Tempo Total</h3>
             <p><strong>Mínimo:</strong> {stats.totalTime.min}s</p>
-            <p><strong>Médio:</strong> {stats.totalTime.avg.toFixed(3)}s</p>
+            <p><strong>Médio:</strong> {formatNumber(stats.totalTime.avg)}s</p>
             <p><strong>Máximo:</strong> {stats.totalTime.max}s</p>
           </div>
 
           <div>
             <h3 className="font-semibold mb-2">Time to First Byte</h3>
             <p><strong>Mínimo:</strong> {stats.timeToFirstByte.min}s</p>
-            <p><strong>Médio:</strong> {stats.timeToFirstByte.avg.toFixed(3)}s</p>
+            <p><strong>Médio:</strong> {formatNumber(stats.timeToFirstByte.avg)}s</p>
             <p><strong>Máximo:</strong> {stats.timeToFirstByte.max}s</p>
           </div>
 
           <div>
             <h3 className="font-semibold mb-2">Time to Last Byte</h3>
             <p><strong>Mínimo:</strong> {stats.timeToLastByte.min}s</p>
-            <p><strong>Médio:</strong> {stats.timeToLastByte.avg.toFixed(3)}s</p>
+            <p><strong>Médio:</strong> {formatNumber(stats.timeToLastByte.avg)}s</p>
             <p><strong>Máximo:</strong> {stats.timeToLastByte.max}s</p>
           </div>
         </CardContent>
@@ -88,8 +98,12 @@ export default function DetalheResumo() {
             <ResponseTimeChart result={result} />
           </div>
         </CardContent>
-</Card>
+      </Card>
+      <Button onClick={() => exportToJson(data, data._id)} className="mb-4">
+          Exportar como JSON
+      </Button>
 
     </div>
   )
 }
+
