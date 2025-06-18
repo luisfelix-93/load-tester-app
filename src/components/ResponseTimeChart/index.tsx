@@ -1,5 +1,3 @@
-// src/components/ResponseTimeChart.tsx
-
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -24,7 +22,6 @@ interface Props {
 }
 
 export default function ResponseTimeChart({ result }: Props) {
-  // Ordena os resultados pelo número da requisição
   const sortedResult = [...result].sort((a, b) => a.n - b.n);
 
   const chartData = {
@@ -37,7 +34,8 @@ export default function ResponseTimeChart({ result }: Props) {
         borderColor: '#10b981',
         backgroundColor: '#10b981',
         tension: 0.2,
-        pointRadius: 2,
+        pointRadius: 3,
+        pointHoverRadius: 6,
       },
     ],
   };
@@ -49,12 +47,25 @@ export default function ResponseTimeChart({ result }: Props) {
         display: true,
         position: 'top' as const,
       },
+      tooltip: {
+        callbacks: {
+          label: function (context: any) {
+            const index = context.dataIndex;
+            const item = sortedResult[index];
+            return [
+              `Requisição: ${item.n}`,
+              `Tempo de Resposta: ${item.responseTime}s`,
+              `Status Code: ${item.codeStatus}`,
+            ];
+          },
+        },
+      },
     },
     scales: {
       y: {
         title: {
           display: true,
-          text: 'Tempo (ms)',
+          text: 'Tempo (s)',
         },
         beginAtZero: true,
       },
