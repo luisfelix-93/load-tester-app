@@ -57,6 +57,7 @@ export default function StatusCodeChart({ result }: Props) {
 
   const options = {
     responsive: true,
+    mantainAspectRatio: false,
     plugins: {
       legend: {
         position: 'bottom' as const
@@ -65,9 +66,12 @@ export default function StatusCodeChart({ result }: Props) {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto">
+    <div className="w-full h-full flex flex-col items-center justify-center">
       <h2 className="text-xl font-bold mb-4">Gráfico de Status Code</h2>
-      <Pie data={chartData} options={options} />
+      <div className="relative w-[350px] h-[350px]">
+        <Pie data={chartData} options={options} />
+      </div>
     </div>
   );
+
 }
