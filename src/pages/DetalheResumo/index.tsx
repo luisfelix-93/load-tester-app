@@ -7,6 +7,8 @@ import ResumoSection from "@/components/ResumoSection"
 import StatusCodeChart from "@/components/StatusCodeChart"
 import ResponseTimeChart from "@/components/ResponseTimeChart"
 import { cn } from "@/lib/utils"
+import ResponseTimeHistogram from "@/components/ResponseTimeHistogram"
+import AverageTimeByStatusChart from "@/components/AverageTimeByStatusChart"
 
 export default function DetalheResumo() {
   const { testId } = useParams()
@@ -61,6 +63,22 @@ export default function DetalheResumo() {
         <ResponseTimeChart result={data.result} />
       </section>
 
+      {/* Página 4 */}
+      <section className="h-screen snap-start flex flex-col items-center justify-center px-4">
+        <h2 className="text-2xl font-bold mb-4">Histograma do Tempo de Resposta</h2>
+        <ResponseTimeHistogram result={data.result} />
+      </section>
+      {/* Exportar botão fixo */}
+      <div className="fixed bottom-4 right-4 z-10">
+        <Button onClick={exportToJson}>Exportar como JSON</Button>
+      </div>
+
+      {/* Página 5 */}
+      <section className="h-screen snap-start flex flex-col items-center justify-center px-4">
+        <h2 className="text-2xl font-bold mb-4">Tempo Médio de Requisição por Status Code</h2>
+        <AverageTimeByStatusChart result={data.result} />
+      </section>
+
       {/* Exportar botão fixo */}
       <div className="fixed bottom-4 right-4 z-10">
         <Button onClick={exportToJson}>Exportar como JSON</Button>
@@ -68,7 +86,7 @@ export default function DetalheResumo() {
 
       {/* Indicador de página */}
       <div className="fixed left-4 top-1/2 -translate-y-1/2 z-10 flex flex-col gap-2">
-        {[0, 1, 2].map((i) => (
+        {[0, 1, 2, 3, 4].map((i) => (
           <span
             key={i}
             className={cn(

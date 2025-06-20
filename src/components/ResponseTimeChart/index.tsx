@@ -65,7 +65,7 @@ export default function ResponseTimeChart({ result }: Props) {
       y: {
         title: {
           display: true,
-          text: 'Tempo (s)',
+          text: 'Tempo (ms)',
         },
         beginAtZero: true,
       },
