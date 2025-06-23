@@ -10,7 +10,9 @@ export interface IDateRange {
 export interface ILoadTestData {
     targetUrl: string,
     numRequests: number,
-    concurrency: number
+    concurrency: number,
+    method?: string,
+    payload?: any
 }
 
 export const createTest = async (testData : ILoadTestData) => {
@@ -21,7 +23,7 @@ export const createTest = async (testData : ILoadTestData) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            data: JSON.stringify(testData)
+            data: testData
         }
         const response = await axios.request(options);
         return response.data;

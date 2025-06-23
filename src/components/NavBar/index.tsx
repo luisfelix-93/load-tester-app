@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { cn } from "../../lib/utils";
 
 const navItems = [
-  { label: "Início", path: "/" },
+  { label: "Teste", path: "/loadtest" },
   { label: "Resumo", path: "/resumo" },
 ];
 
@@ -12,9 +12,10 @@ export default function Navbar() {
   return (
     <header className="w-full bg-white border-b shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* Logo ou nome da aplicação */}
-        <div className="text-xl font-bold text-blue-600">Load Tester</div>
-
+        {/* Logo como link para a home */}
+        <Link to="/" className="text-xl font-bold text-blue-600 hover:opacity-80 transition">
+          Load Tester
+        </Link>
         {/* Navegação */}
         <nav className="flex space-x-4">
           {navItems.map((item) => (

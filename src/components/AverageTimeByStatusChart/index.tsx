@@ -38,7 +38,7 @@ export default function AverageTimeByStatusChart({ result }: Props) {
 
     const backgroundColors = labels.map((code) => {
         const status = Number(code);
-        if (status === 200) return '#3b82f6' // azul
+        if (status === 200 || 201 || 202) return '#3b82f6' // azul
         if (status === 500) return '#ef4444' // vermelho
         if (status === 408) return '#10b981' // verde
     })
