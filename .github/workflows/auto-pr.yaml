@@ -21,7 +21,7 @@ jobs:
           script: |
             const { GITHUB_REF, GITHUB_TOKEN } = process.env;
             const branch = GITHUB_REF.replace('refs/heads/', '');
-            const baseBranch = 'v1';
+            const baseBranch = 'main';
 
             // Ignorar branch main e branches de tags
             // 
