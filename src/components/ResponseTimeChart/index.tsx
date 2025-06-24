@@ -28,7 +28,7 @@ export default function ResponseTimeChart({ result }: Props) {
     labels: sortedResult.map(item => item.n),
     datasets: [
       {
-        label: 'Tempo de Resposta (s)',
+        label: 'Tempo de Resposta (ms)',
         data: sortedResult.map(item => item.responseTime),
         fill: false,
         borderColor: '#10b981',

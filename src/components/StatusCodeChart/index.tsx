@@ -27,7 +27,7 @@ interface Props {
 const getColorByStatusCode = (code: number): string => {
   if (code === 500) return '#ef4444'; // vermelho
   if (code === 408) return '#10b981'; // verde
-  if (code === 200) return '#3b82f6'; // azul
+  if (code === 200 || 201 || 202) return '#3b82f6'; // azul
   return '#6b7280'; // cinza padrão
 };
 
