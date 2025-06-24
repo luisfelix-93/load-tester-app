@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["DOM", "DOM.Iterable", "ES2015"],
+    "lib": ["DOM", "DOM.Iterable", "ES2017"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]

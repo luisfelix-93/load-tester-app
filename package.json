@@ -1,7 +1,7 @@
 {
   "name": "load-tester-app",
   "private": true,
-  "version": "0.0.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,8 +11,9 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.0",
+    "@radix-ui/react-switch": "^1.2.5",
     "axios": "^1.8.4",
-    "chart.js": "^4.4.9",
+    "chart.js": "^4.5.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "file-saver": "^2.0.5",

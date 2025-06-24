@@ -1,6 +1,6 @@
 # 💫 Load Tester - Ferramenta de Teste de Carga
 
-Este projeto é uma aplicação de teste de carga desenvolvida com **React**, **TailwindCSS** e **ShadCN UI** no frontend, e uma API em **Node.js**/**TypeScript** no backend.
+Este projeto é uma aplicação de teste de carga desenvolvida com **React**, **TypeScript**, **TailwindCSS** e **ShadCN UI** no frontend, e uma API em **Node.js**/**TypeScript** no backend.
 
 A ferramenta permite enviar um número configurável de requisições HTTP para uma URL alvo e visualizar estatísticas e gráficos de desempenho.
 
@@ -12,13 +12,20 @@ A ferramenta permite enviar um número configurável de requisições HTTP para 
   - URL alvo
   - Número de requisições
   - Nível de concorrência
+  - Método (GET/POST) e envio de payload JSON
 - Exibição de resultados:
   - Número de sucessos e falhas
   - Tempo total de resposta (mínimo, médio e máximo)
   - Tempo para o primeiro e último byte
 - Gráficos:
-  - Status code por requisição
-  - Tempo de resposta por requisição
+  - Status code por requisição (pizza)
+  - Tempo de resposta por requisição (linha)
+  - Histograma dos tempos de resposta
+  - Tempo médio por status code (barras)
+- Relatórios:
+  - Visualização interativa em páginas de relatório com rolagem vertical (snap)
+  - Exportação dos resultados como JSON
+  - Busca de relatórios por intervalo de datas
 - Interface responsiva e moderna com **TailwindCSS** + **ShadCN UI**
 
 ---
@@ -32,6 +39,8 @@ A ferramenta permite enviar um número configurável de requisições HTTP para 
   - ShadCN UI
   - Axios (para chamadas HTTP)
   - React Router DOM (navegação)
+  - Chart.js + react-chartjs-2 (gráficos)
+  - FileSaver (exportação JSON)
 
 - **Backend**
   - Node.js
@@ -46,7 +55,7 @@ A ferramenta permite enviar um número configurável de requisições HTTP para 
 ### Pré-requisitos
 
 - [Node.js](https://nodejs.org/) v18+
-- [Yarn](https://yarnpkg.com/) ou [npm](https://www.npmjs.com/)
+- [npm](https://www.npmjs.com/) ou [Yarn](https://yarnpkg.com/)
 
 ---
 
@@ -54,7 +63,7 @@ A ferramenta permite enviar um número configurável de requisições HTTP para 
 
 ```bash
 git clone https://github.com/luisfelix-93/load-tester-app.git
-cd load-tester
+cd load-tester-app
 ```
 
 ---
@@ -63,11 +72,11 @@ cd load-tester
 
 ```bash
 cd backend
-yarn install
-yarn dev
+npm install
+npm run dev
 ```
 
-O backend será iniciado na porta `5173`.
+O backend será iniciado na porta `4000`.
 
 ---
 
@@ -76,9 +85,9 @@ O backend será iniciado na porta `5173`.
 Em outra aba/terminal:
 
 ```bash
-cd frontend
-yarn install
-yarn dev
+cd load-tester-app
+npm install
+npm run dev
 ```
 
 O frontend será iniciado na porta `5173`.
@@ -89,31 +98,44 @@ O frontend será iniciado na porta `5173`.
 
 ```
 src/
- ├── api/               # Serviços de chamada HTTP
- ├── components/        # Componentes reutilizáveis (Cards, Charts, etc.)
- ├── pages/
- │    ├── Home/         # Página para iniciar o teste
- │    └── Resumo/       # Página para visualizar resultados
- └── App.tsx            # Configuração de rotas
+ ├── api/               # Serviços de chamada HTTP (ex: loadtester.ts)
+ ├── components/        # Componentes reutilizáveis (Cards, Charts, Layout, etc.)
+ │    ├── AverageTimeByStatusChart/
+ │    ├── Layout/
+ │    ├── NavBar/
+ │    └── ...
+ ├── lib/               # Funções utilitárias (ex: utils.ts)
+ ├── pages/             # Páginas principais do app
+ │    ├── DetalheResumo/
+ │    ├── Error/
+ │    ├── Home/
+ │    ├── Loading/
+ │    ├── Relatorios/
+ │    ├── Resumo/
+ │    └── Teste/
+ ├── App.tsx            # Configuração de rotas
+ └── main.tsx           # Ponto de entrada do app
 ```
 
 ---
 
-## 📈 Exemplo de Fluxo de Uso
+## 📈 Fluxo de Uso
 
 1. Acesse a página inicial.
-2. Informe a URL alvo, o número de requisições e a concorrência desejada.
+2. Informe a URL alvo, o número de requisições, concorrência, método (GET/POST) e payload (se POST).
 3. Inicie o teste.
 4. Veja o resumo dos resultados, incluindo gráficos de desempenho.
+5. Navegue pelos relatórios anteriores ou busque por intervalo de datas.
+6. Exporte os resultados como JSON, se desejar.
 
 ---
 
 ## 🛠️ Melhorias Futuras
 
-- Exportação dos resultados (JSON/CSV)
-- Suporte a testes POST/PUT (envio de payloads)
-- Testes de autenticação (JWT, Basic Auth)
+- Exportação dos resultados em CSV
+- Suporte a autenticação (JWT, Basic Auth)
 - Implementação de filas de teste para múltiplos usuários
+- Filtros avançados nos relatórios
 
 ---
 
@@ -131,12 +153,12 @@ Luis Felipe Felix Filho
 
 ---
 
-## Extras (se quiser adicionar badges)
+## Badges
 
 ```markdown
-![React](https://img.shields.io/badge/React-18.x-blue)
+![React](https://img.shields.io/badge/React-19.x-blue)
 ![Node.js](https://img.shields.io/badge/Node.js-18.x-green)
-![TypeScript](https://img.shields.io/badge/TypeScript-4.x-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ```
 
