@@ -1,0 +1,50 @@
+name: Update Parent Submodule on Merge
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    update-parent:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Parent Repository
+              uses: actions/checkout@v2
+              with: 
+                repository: luisfelix-93/load-tester
+                token: ${{ secrets.LOAD_TEST_TOKEN }}
+                ref: prod
+            - name: Gerar data no formato YYYYmmDD
+              id: get_date
+              run: |
+                date=$(date +%Y%m%d)
+                echo "date_tag=$date" >> $GITHUB_OUTPUT
+            - name: Update submodule reference
+              run: |
+                git config --global user.name "github-actions[bot]"
+                git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+                git submodule update --remote --init --recursive
+          
+                # Verifica se há alterações no índice (submódulo atualizado)
+                if git diff --exit-code --quiet; then
+                  echo "has_changes=false" >> $GITHUB_OUTPUT
+                  echo "No changes detected in submodule reference."
+                else
+                  echo "has_changes=true" >> $GITHUB_OUTPUT # Marca que houve mudanças
+                  echo "Changes detected in submodule reference. Staging commit..."
+                  git add .
+                  git commit -m "chore: Update submodule ${{ github.repository }} to ${{ github.sha }}"
+                fi
+            - name: Create Pull Request
+              uses: peter-evans/create-pull-request@v6
+              with: 
+                token: ${{ secrets.LOAD_TEST_TOKEN }}
+                commit-message: "${{ steps.get_date.outputs.date_tag}} - chore: Update submodule ${{ github.repository }}"
+                title: "Atualização automática do submódulo ${{ github.repository }}"
+                body: "Este PR atualiza o submódulo  ${{ github.repository }} para o commit mais recent após o merge na branch main."
+                branch: "auto/update-submodule-${{ github.event.after }}"
+                base: "prod"
+                labels: |
+                    automation
