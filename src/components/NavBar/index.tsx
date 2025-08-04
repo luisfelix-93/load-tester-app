@@ -4,6 +4,7 @@ import { cn } from "../../lib/utils";
 const navItems = [
   { label: "Teste", path: "/loadtest" },
   { label: "Resumo", path: "/resumo" },
+  { label: "Health Check", path: "/monitor"}
 ];
 
 export default function Navbar() {

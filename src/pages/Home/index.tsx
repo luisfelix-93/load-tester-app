@@ -23,6 +23,26 @@ export default function Home() {
                 <li>✅ Exportação dos Resultados como JSON</li>
                 <li>✅ Visualização interativa em páginas de relatório com rolagens</li>
             </ul>
+
+            <div className="bg-white rounded-lg shadow-md p-6 mb-8 max-w-md w-full">
+                <h2 className="text-2xl font-bold text-gray-800 mb-2">🔎 Monitoramento de Health Check</h2>
+                <p className="text-gray-700 mb-2">
+                    Cadastre endpoints para monitorar disponibilidade e tempo de resposta em tempo real.
+                </p>
+                <ul className="list-disc pl-5 text-gray-600 space-y-1 text-left">
+                    <li>Receba relatórios de uptime e histórico de status</li>
+                    <li>Visualize gráficos de disponibilidade e resposta</li>
+                    <li>Gerencie endpoints facilmente pelo dashboard</li>
+                </ul>
+                <Button
+                    onClick={() => navigate("/hc-monitor")}
+                    className="mt-4 w-full"
+                    variant="secondary"
+                >
+                    Acessar Monitoramento
+                </Button>
+            </div>
+
             <Button onClick={() => navigate("/loadtest")} className="text-lg px-6 py-3">
                 Iniciar Teste
             </Button>
