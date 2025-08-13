@@ -28,7 +28,7 @@ export default function Resumo() {
           {tests.map((test) => (
             <Card
               key={test._id}
-              onClick={() => navigate(`/resumo/${test._id}`)}
+              onClick={() => navigate(`/resumo/${test.testId}`)}
               className="cursor-pointer hover:shadow-lg transition-shadow"
             >
               <CardHeader>

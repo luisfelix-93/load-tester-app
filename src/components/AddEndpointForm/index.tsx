@@ -20,7 +20,7 @@ export default function AddEndpointForm({ onSuccess }: AddEndpointFormProps) {
         try {
             const response = await createEndpoint({ name, url });
 
-            if (response.status === 201) {
+            if (response) {
                 onSuccess();
                 setName('');
                 setUrl('');

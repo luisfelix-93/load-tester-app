@@ -47,8 +47,15 @@ export default function HCMonitor() {
     }, [endpoints.length]);
 
     useEffect(() => {
-        fetchAllData(); // Chama a nova função de busca
-    }, []);
+        fetchAllData(); // Chama a função de busca na montagem
+
+        const intervalId = setInterval(() => {
+            fetchAllData(); // E a cada 30 segundos
+        }, 30000); // 30 segundos
+
+        // Limpa o intervalo quando o componente é desmontado
+        return () => clearInterval(intervalId);
+    }, [fetchAllData]); // Adiciona fetchAllData como dependência do useEffect
 
     const handleSuccessOnCreate = () => {
         setIsModalOpen(false);
@@ -69,6 +76,12 @@ export default function HCMonitor() {
         {loading && <p className="text-center text-gray-500">Carregando dados...</p>}
         {error && <p className="text-center text-red-500 bg-red-100 p-4 rounded-md">{error}</p>}
 
+        {!loading && !error && endpoints.length === 0 && (
+            <div className="text-center p-12 border-2 border-dashed rounded-lg mt-4">
+                <h3 className="text-xl font-semibold text-gray-700">Nenhum endpoint monitorado</h3>
+                <p className="text-gray-500 mt-2">Clique no botão "+ Adicionar Endpoint" para começar a monitorar.</p>
+            </div>
+        )}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {endpoints.map((endpoint) => (
                 // O EndpointCard não precisa de nenhuma mudança, ele receberá a prop 'logs'

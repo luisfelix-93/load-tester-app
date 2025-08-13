@@ -5,47 +5,51 @@ export default function Home() {
     const navigate = useNavigate();
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center text-center px-4 bg-gray-50">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
-                LoadTester
-            </h1>
-            <p className="text-left text-gray-700 max -w-2x1 mb-8">
-                Uma ferramenta para simular carga em endpoints HTTP e analisar a performance
-                com gráficos detalhados e relatórios interativos.
-            </p>
-
-            <ul className="text-left text-gray-600 mb-8 space-y-2 max-w-md">
-                <li>✅ Simulação com múltiplas requisições e concorrência configurável</li>
-                <li>✅ Métricas de sucesso, falha, TTFB, TTLB</li>
-                <li>✅ Gráficos de Requisição E Retorno</li>
-                <li>✅ Gráficos de Tempo de Resposta por Requisição</li>
-                <li>✅ Gráficos de Código de Status e Tempo de Requisição</li>
-                <li>✅ Exportação dos Resultados como JSON</li>
-                <li>✅ Visualização interativa em páginas de relatório com rolagens</li>
-            </ul>
-
-            <div className="bg-white rounded-lg shadow-md p-6 mb-8 max-w-md w-full">
-                <h2 className="text-2xl font-bold text-gray-800 mb-2">🔎 Monitoramento de Health Check</h2>
-                <p className="text-gray-700 mb-2">
-                    Cadastre endpoints para monitorar disponibilidade e tempo de resposta em tempo real.
-                </p>
-                <ul className="list-disc pl-5 text-gray-600 space-y-1 text-left">
-                    <li>Receba relatórios de uptime e histórico de status</li>
-                    <li>Visualize gráficos de disponibilidade e resposta</li>
-                    <li>Gerencie endpoints facilmente pelo dashboard</li>
-                </ul>
-                <Button
-                    onClick={() => navigate("/hc-monitor")}
-                    className="mt-4 w-full"
-                    variant="secondary"
-                >
-                    Acessar Monitoramento
-                </Button>
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
+            <div className="text-center mb-12">
+                <h1 className="text-4xl font-bold text-gray-800">Load Tester & Monitor</h1>
+                <p className="text-lg text-gray-600 mt-2">Suas ferramentas para análise de performance e disponibilidade.</p>
             </div>
 
-            <Button onClick={() => navigate("/loadtest")} className="text-lg px-6 py-3">
-                Iniciar Teste
-            </Button>
+            <div className="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* Card 1: Teste de Carga */}
+                <div className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center text-center h-full">
+                    <h2 className="text-3xl font-bold text-gray-800 mb-4">⚡ Teste de Carga</h2>
+                    <p className="text-gray-700 mb-6 flex-grow">
+                        Simule carga em endpoints HTTP e analise a performance
+                        com gráficos detalhados e relatórios interativos.
+                    </p>
+                    <ul className="text-left text-gray-600 mb-8 space-y-2">
+                        <li>✅ Simulação com múltiplas requisições</li>
+                        <li>✅ Métricas de sucesso, falha, e tempo de resposta</li>
+                        <li>✅ Gráficos interativos dos resultados</li>
+                        <li>✅ Exportação dos relatórios em JSON</li>
+                    </ul>
+                    <Button onClick={() => navigate("/loadtest")} className="w-full max-w-xs text-lg mt-auto">
+                        Iniciar Teste
+                    </Button>
+                </div>
+
+                {/* Card 2: Health Check */}
+                <div className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center text-center h-full">
+                    <h2 className="text-3xl font-bold text-gray-800 mb-4">🔎 Monitoramento de Health Check</h2>
+                    <p className="text-gray-700 mb-6 flex-grow">
+                        Cadastre endpoints para monitorar disponibilidade e tempo de resposta em tempo real.
+                    </p>
+                    <ul className="text-left text-gray-600 mb-8 space-y-2">
+                        <li>✅ Relatórios de uptime e histórico de status</li>
+                        <li>✅ Gráficos de disponibilidade e resposta</li>
+                        <li>✅ Gerenciamento fácil pelo dashboard</li>
+                    </ul>
+                    <Button
+                        onClick={() => navigate("/monitor")}
+                        className="w-full max-w-xs text-lg mt-auto"
+                        variant="secondary"
+                    >
+                        Acessar Monitoramento
+                    </Button>
+                </div>
+            </div>
         </div>
-    )
+    );
 }

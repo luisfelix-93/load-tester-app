@@ -67,9 +67,9 @@ export default function Teste () {
     try {
       setLoading(true);
       const result = await createTest(testData);
-      if (result && result._id) {
+      if (result && result.testId) {
         // Redireciona para a tela de loading passando o ID do teste
-        navigate(`/loading/${result._id}`);
+        navigate(`/loading/${result.testId}`);
       } else {
         // Caso não tenha _id, redireciona para erro
         navigate("/error");

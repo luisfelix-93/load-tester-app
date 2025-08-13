@@ -1,5 +1,7 @@
 import { Endpoint, getEndpointById, getLogsByEndpoint, HealthCheckLog } from "@/api/healthcheck";
 import LogTimeChart from "@/components/LogTimeChart";
+import UptimePieChart from "@/components/UptimePieChart";
+
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -42,7 +44,7 @@ export default function HCDetails() {
         <div className="space-y-8">
             <div>
                 <button
-                    onClick={() => navigate('/')}
+                    onClick={() => navigate('/monitor')}
                     className="mb-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >
                     Retornar ao Início
@@ -55,7 +57,14 @@ export default function HCDetails() {
             </div>
 
             {logs.length > 0 ? (
-                <LogTimeChart logs={logs} />
+                <div className="flex flex-col gap-8 max-h-[70vh] overflow-y-auto pb-4">
+                    <div className="bg-white p-6 rounded-lg shadow-md">
+                        <LogTimeChart logs={logs} />
+                    </div>
+                    {/* <div className="bg-white p-6 rounded-lg shadow-md">
+                        <UptimePieChart logs={logs} />
+                    </div> */}
+                </div>
             ) : (
                 <div className="bg-white p-6 rounded-lg shadow-md text-center text-gray-500">
                     Ainda não há logs de monitoramento para este endpoint.
