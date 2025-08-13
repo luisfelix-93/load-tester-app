@@ -8,6 +8,8 @@ import DetalheResumo from "./pages/DetalheResumo";
 import Resumo from "./pages/Resumo";
 import Home from "./pages/Home";
 import Teste from "./pages/Teste";
+import HCMonitor from "./pages/HC-Monitor";
+import HCDetails from "./pages/HC-Details";
 
 export default function App() {
   return (
@@ -21,6 +23,8 @@ export default function App() {
           <Route path="error" element={<ErrorPage/>}/>
           <Route path="resumo" element={<Resumo/>}/>
           <Route path="resumo/:testId" element={<DetalheResumo />} />
+          <Route path="monitor" element={<HCMonitor/>} />
+          <Route path="endpoint/:endpointId" element={<HCDetails/>} />
         </Route>
       </Routes>
     </Router>

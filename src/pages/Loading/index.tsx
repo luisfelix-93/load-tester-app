@@ -10,11 +10,13 @@ export default function Loading () {
         const interval = setInterval(async () =>{
             if (!testId) return;
             const data = await getTestResults(testId);
-            if (data && data.result.length > 0) {
+            // Verifica se 'data' é um objeto, não nulo, e se 'result' é um array com itens
+            if (typeof data === 'object' && data !== null && Array.isArray(data.result) && data.result.length > 0) {
                 clearInterval(interval);
                 navigate(`/resumo/${testId}`);
             }
-        }, 1000);
+            // Se os dados não estiverem prontos ou houver um erro temporário, o polling continua
+        }, 2000); // Polling a cada 2 segundos
         return () => clearInterval(interval);
     }, [testId, navigate]);
     return(

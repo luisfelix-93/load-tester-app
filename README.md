@@ -26,6 +26,11 @@ A ferramenta permite enviar um número configurável de requisições HTTP para 
   - Visualização interativa em páginas de relatório com rolagem vertical (snap)
   - Exportação dos resultados como JSON
   - Busca de relatórios por intervalo de datas
+- Monitoramento de Health Check de APIs:
+  - Acompanhamento do status (Online/Offline) de endpoints configurados.
+  - Visualização de métricas de disponibilidade (uptime) em gráficos de pizza.
+  - Análise de tempos de resposta de health checks ao longo do tempo.
+  - Páginas dedicadas para monitoramento geral e detalhes de cada endpoint.
 - Interface responsiva e moderna com **TailwindCSS** + **ShadCN UI**
 
 ---
@@ -108,6 +113,8 @@ src/
  ├── pages/             # Páginas principais do app
  │    ├── DetalheResumo/
  │    ├── Error/
+ │    ├── HC-Details/    # Detalhes do Health Check de um endpoint
+ │    ├── HC-Monitor/    # Monitoramento geral de Health Checks
  │    ├── Home/
  │    ├── Loading/
  │    ├── Relatorios/
@@ -127,6 +134,7 @@ src/
 4. Veja o resumo dos resultados, incluindo gráficos de desempenho.
 5. Navegue pelos relatórios anteriores ou busque por intervalo de datas.
 6. Exporte os resultados como JSON, se desejar.
+7. Acesse a seção de Monitoramento de Health Check para acompanhar a disponibilidade das suas APIs.
 
 ---
 
