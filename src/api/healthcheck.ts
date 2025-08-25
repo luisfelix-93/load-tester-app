@@ -7,6 +7,8 @@ export interface HealthCheckLog {
   statusCode: number | null;
   responseTimeInMs: number;
   createdAt: string;
+  updatedAt: string;
+  data?: any;
 }
 
 // Define a estrutura de um Endpoint, usando o tipo de log que acabamos de criar

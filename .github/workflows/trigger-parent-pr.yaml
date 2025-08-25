@@ -14,7 +14,7 @@ jobs:
               with: 
                 repository: luisfelix-93/load-tester
                 token: ${{ secrets.LOAD_TEST_TOKEN }}
-                ref: prod
+                ref: v2
             - name: Gerar data no formato YYYYmmDD
               id: get_date
               run: |
