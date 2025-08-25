@@ -28,8 +28,8 @@ A ferramenta permite enviar um número configurável de requisições HTTP para 
   - Busca de relatórios por intervalo de datas
 - Monitoramento de Health Check de APIs:
   - Acompanhamento do status (Online/Offline) de endpoints configurados.
-  - Visualização de métricas de disponibilidade (uptime) em gráficos de pizza.
   - Análise de tempos de resposta de health checks ao longo do tempo.
+  - Análise dos retornos da API em todo o monitoramento
   - Páginas dedicadas para monitoramento geral e detalhes de cada endpoint.
 - Interface responsiva e moderna com **TailwindCSS** + **ShadCN UI**
 
@@ -107,6 +107,7 @@ src/
  ├── components/        # Componentes reutilizáveis (Cards, Charts, Layout, etc.)
  │    ├── AverageTimeByStatusChart/
  │    ├── Layout/
+ │    ├── LogDisplay/    # Exibe os logs de Health Check
  │    ├── NavBar/
  │    └── ...
  ├── lib/               # Funções utilitárias (ex: utils.ts)

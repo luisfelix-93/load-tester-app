@@ -1,5 +1,6 @@
 import { Endpoint, getEndpointById, getLogsByEndpoint, HealthCheckLog } from "@/api/healthcheck";
 import LogTimeChart from "@/components/LogTimeChart";
+import LogDisplay from "@/components/LogDisplay";
 import UptimePieChart from "@/components/UptimePieChart";
 
 import { useEffect, useState } from "react";
@@ -51,22 +52,20 @@ export default function HCDetails() {
                 </button>
             </div>
             <div>
-                <h2 className="text-3xl font-bold text-gray-800">{endpoint.name}</h2>
-                <p className="text-gray-500">{endpoint.url}</p>
-                <p className="text-sm text-gray-600">Uptime ({logs.length} checks): <span className="font-bold">{uptime}%</span></p>
+                <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200">{endpoint.name}</h2>
+                <p className="text-gray-500 dark:text-gray-400">{endpoint.url}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-300">Uptime ({logs.length} checks): <span className="font-bold">{uptime}%</span></p>
             </div>
 
             {logs.length > 0 ? (
                 <div className="flex flex-col gap-8 max-h-[70vh] overflow-y-auto pb-4">
-                    <div className="bg-white p-6 rounded-lg shadow-md">
+                    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
                         <LogTimeChart logs={logs} />
                     </div>
-                    {/* <div className="bg-white p-6 rounded-lg shadow-md">
-                        <UptimePieChart logs={logs} />
-                    </div> */}
+                    <LogDisplay logs={logs} />
                 </div>
             ) : (
-                <div className="bg-white p-6 rounded-lg shadow-md text-center text-gray-500">
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md text-center text-gray-500">
                     Ainda não há logs de monitoramento para este endpoint.
                 </div>
             )}
