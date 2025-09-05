@@ -35,7 +35,7 @@ export const createEndpoint = async (data: IEndpoint) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            url: 'http://localhost:5000/api/endpoints',
+            url: `/api/endpoints`,
             data: data
         }
         const response = await axios.request(options);
@@ -49,7 +49,7 @@ export const getEndpoints = async () => {
     try {
         const options = {
             method: 'GET',
-            url: 'http://localhost:5000/api/endpoints'
+            url: `/api/endpoints`
         };
         const response = await axios.request(options);
         if (response.status === 200) {
@@ -68,7 +68,7 @@ export const getEndpointById =  async (endpointId: string | undefined) => {
     try {
         const options = {
             method: 'GET',
-            url: `http://localhost:5000/api/endpoints/${endpointId}`
+            url: `/api/endpoints/${endpointId}`
         }
         const response = await axios.request(options);
         if (response.status === 200) {
@@ -86,7 +86,7 @@ export const getLogsByEndpoint = async (endpointId: string | undefined) => {
     try {
         const options = {
             method: "GET",
-            url: `http://localhost:5000/api/logs/${endpointId}`
+            url: `/api/logs/${endpointId}`
         };
         const response = await axios.request(options);
         if (response.status === 200) {
@@ -97,5 +97,20 @@ export const getLogsByEndpoint = async (endpointId: string | undefined) => {
         }
     } catch (error) {
         console.error(error);
+    }
+}
+
+export const deleteEndpoint = async (endpointId: string | undefined) => {
+    try {
+        const options = {
+            method: 'DELETE',
+            url: `/api/endpoints/${endpointId}`
+        }
+        const response = await axios.request(options);
+        if(response.status === 200) {
+            return response.data;
+        }
+    } catch (error) {
+        console.error("Erro ao deletar o endpoint: ", error);
     }
 }

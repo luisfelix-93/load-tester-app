@@ -26,12 +26,16 @@ A ferramenta permite enviar um número configurável de requisições HTTP para 
   - Visualização interativa em páginas de relatório com rolagem vertical (snap)
   - Exportação dos resultados como JSON
   - Busca de relatórios por intervalo de datas
+  - Busca de relatórios por URL
+  - Deleção de relatórios de teste
 - Monitoramento de Health Check de APIs:
   - Acompanhamento do status (Online/Offline) de endpoints configurados.
   - Análise de tempos de resposta de health checks ao longo do tempo.
-  - Análise dos retornos da API em todo o monitoramento
+  - Análise dos retornos da API em todo o monitoramento, com visualização dos logs em JSON.
   - Páginas dedicadas para monitoramento geral e detalhes de cada endpoint.
-- Interface responsiva e moderna com **TailwindCSS** + **ShadCN UI**
+  - Deleção de endpoints de health check.
+- Interface responsiva e moderna com **TailwindCSS** + **ShadCN UI**:
+  - Suporte a **Modo Escuro (Dark Mode)** com seletor de tema.
 
 ---
 
@@ -61,6 +65,7 @@ A ferramenta permite enviar um número configurável de requisições HTTP para 
 
 - [Node.js](https://nodejs.org/) v18+
 - [npm](https://www.npmjs.com/) ou [Yarn](https://yarnpkg.com/)
+- [Docker](https://www.docker.com/) (para rodar com o gateway Nginx)
 
 ---
 
@@ -73,7 +78,17 @@ cd load-tester-app
 
 ---
 
-### 2. Rodar o Backend
+### 2. Configuração do Ambiente
+
+Este projeto utiliza um gateway Nginx para gerenciar as requisições para as APIs de backend. As URLs das APIs são configuradas em `nginx.conf`.
+
+Para o desenvolvimento local, as APIs são acessadas através dos seguintes proxies:
+- `/load-test` -> `http://localhost:4000`
+- `/api` -> `http://localhost:5000`
+
+---
+
+### 3. Rodar o Backend
 
 ```bash
 cd backend
@@ -85,7 +100,7 @@ O backend será iniciado na porta `4000`.
 
 ---
 
-### 3. Rodar o Frontend
+### 4. Rodar o Frontend
 
 Em outra aba/terminal:
 
@@ -109,6 +124,7 @@ src/
  │    ├── Layout/
  │    ├── LogDisplay/    # Exibe os logs de Health Check
  │    ├── NavBar/
+ │    ├── ThemeProvider/ # Provedor de tema (Dark Mode)
  │    └── ...
  ├── lib/               # Funções utilitárias (ex: utils.ts)
  ├── pages/             # Páginas principais do app
@@ -136,6 +152,7 @@ src/
 5. Navegue pelos relatórios anteriores ou busque por intervalo de datas.
 6. Exporte os resultados como JSON, se desejar.
 7. Acesse a seção de Monitoramento de Health Check para acompanhar a disponibilidade das suas APIs.
+8. Alterne entre os temas Light e Dark no seletor de tema no canto superior direito.
 
 ---
 
@@ -170,4 +187,3 @@ Luis Felipe Felix Filho
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ```
-
