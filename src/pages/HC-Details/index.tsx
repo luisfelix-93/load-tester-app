@@ -1,7 +1,7 @@
-import { Endpoint, getEndpointById, getLogsByEndpoint, HealthCheckLog } from "@/api/healthcheck";
+import { Endpoint, getEndpointById, getLogsByEndpoint, HealthCheckLog, deleteEndpoint } from "@/api/healthcheck";
 import LogTimeChart from "@/components/LogTimeChart";
 import LogDisplay from "@/components/LogDisplay";
-import UptimePieChart from "@/components/UptimePieChart";
+import { Button } from "@/components/ui/button";
 
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -24,8 +24,6 @@ export default function HCDetails() {
                 ]);
                 setEndpoint(endpointData);
                 setLogs(logsData);
-                console.log(endpointData);
-                console.log(logsData);
             } catch (error) {
                 setError("Falha ao buscar os dados. Verifique se a API está no ar");
             } finally {
@@ -34,6 +32,19 @@ export default function HCDetails() {
         }
         fetchData();
     }, [endpointId])
+
+    const handleDelete = async () => {
+        if (window.confirm("Tem certeza que deseja deletar este endpoint? Esta ação é irreversível.")) {
+            try {
+                await deleteEndpoint(endpointId);
+                alert("Endpoint deletado com sucesso!");
+                navigate('/hc-monitor');
+            } catch (err) {
+                setError("Falha ao deletar o endpoint.");
+                console.error(err);
+            }
+        }
+    };
 
     if (loading) return <p className="text-center">Carregando detalhes...</p>;
     if (error) return <p className="text-center text-red-500">{error}</p>;
@@ -45,16 +56,21 @@ export default function HCDetails() {
         <div className="space-y-8">
             <div>
                 <button
-                    onClick={() => navigate('/monitor')}
+                    onClick={() => navigate('/hc-monitor')}
                     className="mb-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >
-                    Retornar ao Início
+                    Retornar
                 </button>
             </div>
-            <div>
-                <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200">{endpoint.name}</h2>
-                <p className="text-gray-500 dark:text-gray-400">{endpoint.url}</p>
-                <p className="text-sm text-gray-600 dark:text-gray-300">Uptime ({logs.length} checks): <span className="font-bold">{uptime}%</span></p>
+            <div className="flex justify-between items-center">
+                <div>
+                    <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200">{endpoint.name}</h2>
+                    <p className="text-gray-500 dark:text-gray-400">{endpoint.url}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">Uptime ({logs.length} checks): <span className="font-bold">{uptime}%</span></p>
+                </div>
+                <Button variant="destructive" onClick={handleDelete}>
+                    Deletar Endpoint
+                </Button>
             </div>
 
             {logs.length > 0 ? (

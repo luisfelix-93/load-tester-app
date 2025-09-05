@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:4000/load-test";
+const API_BASE_URL = 'load-test';
 
 export interface IDateRange {
     startDate: string,
@@ -18,7 +18,7 @@ export interface ILoadTestData {
 export const createTest = async (testData : ILoadTestData) => {
     try {
         const options = {
-            url: API_BASE_URL,
+            url: '/load-test',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export const createTest = async (testData : ILoadTestData) => {
 export const getTestResults = async (testId: string) => {
     try {
         const options = {
-            url: `${API_BASE_URL}/test/${testId}`,
+            url: `/load-test/test/${testId}`,
             method: 'GET'
         }
 
@@ -54,7 +54,7 @@ export const getTestResults = async (testId: string) => {
  export const getAllTests = async () => {
     try {
         const options = {
-            url: API_BASE_URL,
+            url: '/load-test',
             method: 'GET'
         }
 
@@ -70,7 +70,7 @@ export const getTestResults = async (testId: string) => {
 export const getTestByDate = async (dateRange: IDateRange) => {
     try {
         const options = {
-            url: `${API_BASE_URL}/load-test/by-date?startDate=${dateRange.startDate}&endDate=${dateRange.endDate}`,
+            url: `/load-test/by-date?startDate=${dateRange.startDate}&endDate=${dateRange.endDate}`,
             method: 'GET'
         }
         const response = await axios.request(options);
@@ -79,5 +79,35 @@ export const getTestByDate = async (dateRange: IDateRange) => {
         }
     } catch (error) {
         console.error("Erro ao obter os testes por data: ", error);
+    }
+}
+
+export const getTestByUrl = async (url: string) => {
+    try {
+        const options = {
+            url: `/load-test/by-url?url=${url}`,
+            method: 'GET'
+        }
+        const response = await axios.request(options);
+        if (response.status === 200) {
+            return response.data;
+        }
+    } catch (error) {
+        console.error("Erro ao obter os testes por url: ", error);
+    }
+}
+
+export const deleteTest = async (testId: string) => {
+    try {
+        const options = {
+            url: `/load-test/${testId}`,
+            method: 'DELETE'
+        }
+        const response = await axios.request(options);
+        if (response.status === 200) {
+            return response.data;
+        }
+    } catch (error) {
+        console.error("Erro ao deletar o teste: ", error);
     }
 }

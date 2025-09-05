@@ -29,9 +29,10 @@ A ferramenta permite enviar um número configurável de requisições HTTP para 
 - Monitoramento de Health Check de APIs:
   - Acompanhamento do status (Online/Offline) de endpoints configurados.
   - Análise de tempos de resposta de health checks ao longo do tempo.
-  - Análise dos retornos da API em todo o monitoramento
+  - Análise dos retornos da API em todo o monitoramento, com visualização dos logs em JSON.
   - Páginas dedicadas para monitoramento geral e detalhes de cada endpoint.
-- Interface responsiva e moderna com **TailwindCSS** + **ShadCN UI**
+- Interface responsiva e moderna com **TailwindCSS** + **ShadCN UI**:
+  - Suporte a **Modo Escuro (Dark Mode)** com seletor de tema.
 
 ---
 
@@ -109,6 +110,7 @@ src/
  │    ├── Layout/
  │    ├── LogDisplay/    # Exibe os logs de Health Check
  │    ├── NavBar/
+ │    ├── ThemeProvider/ # Provedor de tema (Dark Mode)
  │    └── ...
  ├── lib/               # Funções utilitárias (ex: utils.ts)
  ├── pages/             # Páginas principais do app
@@ -136,6 +138,7 @@ src/
 5. Navegue pelos relatórios anteriores ou busque por intervalo de datas.
 6. Exporte os resultados como JSON, se desejar.
 7. Acesse a seção de Monitoramento de Health Check para acompanhar a disponibilidade das suas APIs.
+8. Alterne entre os temas Light e Dark no seletor de tema no canto superior direito.
 
 ---
 
@@ -170,4 +173,3 @@ Luis Felipe Felix Filho
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ```
-
