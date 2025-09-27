@@ -38,7 +38,7 @@ export default function HCDetails() {
             try {
                 await deleteEndpoint(endpointId);
                 alert("Endpoint deletado com sucesso!");
-                navigate('/hc-monitor');
+                navigate('/monitor');
             } catch (err) {
                 setError("Falha ao deletar o endpoint.");
                 console.error(err);
@@ -56,7 +56,7 @@ export default function HCDetails() {
         <div className="space-y-8">
             <div>
                 <button
-                    onClick={() => navigate('/hc-monitor')}
+                    onClick={() => navigate('monitor')}
                     className="mb-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >
                     Retornar

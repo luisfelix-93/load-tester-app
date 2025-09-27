@@ -37,6 +37,15 @@ A ferramenta permite enviar um número configurável de requisições HTTP para 
 - Interface responsiva e moderna com **TailwindCSS** + **ShadCN UI**:
   - Suporte a **Modo Escuro (Dark Mode)** com seletor de tema.
 
+### 🎨 Design e Experiência do Utilizador (UX)
+
+A aplicação foi redesenhada com foco em uma experiência de usuário aprimorada e um design mais profissional, seguindo o tema "salão de troféus":
+
+*   **Paleta de Cores Sóbria:** Utiliza uma paleta de cores inspirada em um "salão de troféus", com tons de madeira escura, dourado e veludo, proporcionando uma aparência elegante e profissional.
+*   **Design Responsivo:** A interface é totalmente responsiva, garantindo uma experiência de uso consistente em desktops e dispositivos móveis.
+*   **Data Storytelling:** Os resultados dos testes são apresentados em um formato de "Data Storytelling", com títulos e descrições que guiam o usuário através dos dados.
+*   **Navegação Intuitiva:** A navegação foi aprimorada para ser mais intuitiva e fácil de usar, com um menu responsivo e uma estrutura de rotas clara.
+
 ---
 
 ## 📦 Tecnologias Utilizadas
