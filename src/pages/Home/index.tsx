@@ -7,11 +7,11 @@ export default function Home() {
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4">
             <div className="text-center mb-12">
-                <h1 className="text-4xl font-bold text-primary">Load Tester & Monitor</h1>
+                <h1 className="text-4xl font-bold text-primary">support.io</h1>
                 <p className="text-lg text-muted-foreground mt-2">Suas ferramentas para análise de performance e disponibilidade.</p>
             </div>
 
-            <div className="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
                 {/* Card 1: Teste de Carga */}
                 <div className="bg-card rounded-lg shadow-lg p-8 flex flex-col items-center text-center h-full">
                     <h2 className="text-3xl font-bold text-primary mb-4">⚡ Teste de Carga</h2>
@@ -47,6 +47,26 @@ export default function Home() {
                         variant="secondary"
                     >
                         Acessar Monitoramento
+                    </Button>
+                </div>
+
+                {/* Card 3: DNS & SSL Checker */}
+                <div className="bg-card rounded-lg shadow-lg p-8 flex flex-col items-center text-center h-full">
+                    <h2 className="text-3xl font-bold text-primary mb-4">🌐 DNS & SSL Health Checker</h2>
+                    <p className="text-card-foreground mb-6 flex-grow">
+                        Verifique a configuração de DNS e o estado do certificado SSL de qualquer domínio.
+                    </p>
+                    <ul className="text-left text-muted-foreground mb-8 space-y-2">
+                        <li>✅ Análise de registros DNS (A, AAAA, MX, TXT, NS)</li>
+                        <li>✅ Verificação de validade e expiração de certificado SSL</li>
+                        <li>✅ Detalhes do emissor e domínios cobertos</li>
+                    </ul>
+                    <Button
+                        onClick={() => navigate("/dns-checker")}
+                        className="w-full max-w-xs text-lg mt-auto"
+                        variant="outline"
+                    >
+                        Verificar Domínio
                     </Button>
                 </div>
             </div>

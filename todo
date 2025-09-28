@@ -5,3 +5,21 @@
 - [x] Desenvolver uma interface limpa e direta com alta legibilidade.
 - [x] Utilizar uma paleta de cores sóbria (tema "salão de troféus" / museu desportivo).
 - [x] Implementar navegação intuitiva.
+
+## 2. Funcionalidades Principais (Features)
+- [x] F1: Análise de Domínio (Input Principal)
+- [x] F2: Exibição dos Resultados em Tempo Real
+- [x] F3: Visualização Detalhada dos Resultados
+- [x] F4: Histórico de Análises
+- [x] F5: Acesso Direto a uma Análise (Routing)
+
+## 3. Experiência do Utilizador (UX)
+- [ ] UX1: Foco e Simplicidade
+- [ ] UX2: Rapidez e Feedback Imediato
+- [ ] UX3: Clareza e Legibilidade
+- [ ] UX4: Layout Responsivo (Desktop-First)
+
+## 4. Interface do Utilizador (UI)
+- [ ] UI1: Estética Moderna e "Técnica"
+- [ ] UI2: Tipografia
+- [ ] UI3: Componentes Visuais

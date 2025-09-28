@@ -23,6 +23,7 @@ const navItems = [
     ],
   },
   { label: "Health Check", path: "/monitor" },
+  { label: "DNS & SSL Checker", path:"/dns-checker"}
 ];
 
 export default function Navbar() {
@@ -34,7 +35,7 @@ export default function Navbar() {
     <header className="w-full bg-card border-b shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <Link to="/" className="text-xl font-bold text-primary hover:opacity-80 transition">
-          Load Tester
+          support.io
         </Link>
         <div className="hidden md:flex items-center space-x-2">
           <nav className="flex items-center space-x-2">

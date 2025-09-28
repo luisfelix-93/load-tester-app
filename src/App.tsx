@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
-import Inicio from "./pages/Teste";
 import Relatorios from "./pages/Relatorios";
 import Loading from "./pages/Loading";
 import ErrorPage from "./pages/Error";
@@ -10,6 +9,9 @@ import Home from "./pages/Home";
 import Teste from "./pages/Teste";
 import HCMonitor from "./pages/HC-Monitor";
 import HCDetails from "./pages/HC-Details";
+import DNSChecker from "./pages/DNS-Checker";
+import Analysis from "./pages/Analysis";
+import History from "./pages/History";
 
 export default function App() {
   return (
@@ -25,6 +27,9 @@ export default function App() {
           <Route path="resumo/:testId" element={<DetalheResumo />} />
           <Route path="monitor" element={<HCMonitor/>} />
           <Route path="endpoint/:endpointId" element={<HCDetails/>} />
+          <Route path="dns-checker" element={<DNSChecker />} />
+          <Route path="analysis/:id" element={<Analysis />} />
+          <Route path="history/:domain" element={<History />} />
         </Route>
       </Routes>
     </Router>
