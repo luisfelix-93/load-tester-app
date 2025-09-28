@@ -6,7 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronDown, Menu, Moon, Sun } from "lucide-react";
+import { ChevronDown, Menu, Moon, Sun} from "lucide-react";
 import { useTheme } from "../ThemeProvider";
 import { Button } from "../ui/button";
 import { useState } from "react";
@@ -15,14 +15,13 @@ import { useState } from "react";
 const navItems = [
   {
     label: "Teste de Carga",
-    // O path principal pode ser o do primeiro item do submenu ou uma página agregadora
     path: "/loadtest",
     submenu: [
       { label: "Executar Teste", path: "/loadtest" },
       { label: "Histórico", path: "/resumo" },
     ],
   },
-  { label: "Health Check", path: "/monitor" },
+  { label: "Health Check", path: "/monitor"},
   { label: "DNS & SSL Checker", path:"/dns-checker"}
 ];
 
@@ -34,11 +33,11 @@ export default function Navbar() {
   return (
     <header className="w-full bg-card border-b shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <Link to="/" className="text-xl font-bold text-primary hover:opacity-80 transition">
-          support.io
+        <Link to="/">
+          <img src="/support_io.png" alt="support.io logo" className="h-20 w-auto" />
         </Link>
-        <div className="hidden md:flex items-center space-x-2">
-          <nav className="flex items-center space-x-2">
+        <div className="hidden md:flex items-center space-x-4">
+          <nav className="flex items-center space-x-4">
             {navItems.map((item) =>
               item.submenu ? (
                 <DropdownMenu key={item.label}>
@@ -69,10 +68,6 @@ export default function Navbar() {
                   key={item.path}
                   to={item.path}
                   className={cn(
-                    "text-sm font-medium px-3 py-2 rounded-md transition-colors",
-                    location.pathname === item.path
-                      ? "bg-primary text-primary-foreground"
-                      : "text-foreground hover:bg-muted hover:text-muted-foreground"
                   )}
                 >
                   {item.label}

@@ -30,7 +30,7 @@ export interface SSL {
     error?: string;
 }
 
-const URLBase: string = 'http://localhost:8080/api/v1'
+// const URLBase: string = 'http://localhost:8080/api/v1'
 
 export const analyzeUrl = async (targetUrl: string): Promise<AnalysisResult | string> => {
     let result: AnalysisResult;
@@ -40,7 +40,7 @@ export const analyzeUrl = async (targetUrl: string): Promise<AnalysisResult | st
             headers: {
                 'Content-Type': 'application/json'
             },
-            url: `${URLBase}/analyze`,
+            url: `/analyze`,
             data: {
                 target: targetUrl
             }
@@ -60,7 +60,7 @@ export const getAnalysisById = async (analysisId: string): Promise<AnalysisResul
     try {
         const options = {
             method: 'GET',
-            url: `${URLBase}/analysis/${analysisId}`
+            url: `/analysis/${analysisId}`
         }
         const response = await axios.request(options);
         if (response.status === 404) {
@@ -79,7 +79,7 @@ export const getHistoryByTarget = async (targetUrl: string): Promise<AnalysisRes
     try {
         const options = {
             method: 'GET',
-            url: `${URLBase}/history/${targetUrl}`
+            url: `/history/${targetUrl}`
         }
         const response = await axios.request(options);
         if (response.status === 404) {

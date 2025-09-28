@@ -79,9 +79,9 @@ export default function DNSChecker() {
                             <Button onClick={() => navigate(`/analysis/${results.id}`)}>
                                 Ver Detalhes
                             </Button>
-                            <Button onClick={() => navigate(`/history/${results.Target}`)} variant="outline">
+                            {/* <Button onClick={() => navigate(`/history/${results.Target}`)} variant="outline">
                                 Ver Histórico
-                            </Button>
+                            </Button> */}
                         </div>
                         {/* --- CORRIGIDO --- */}
                         {/* Apenas verificamos se o objeto existe, sem usar .length ou [0] */}

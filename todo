@@ -1,25 +1,42 @@
-## 1. Design e Experiência do Utilizador (UX)
-- [x] Implementar design "Desktop-First".
-- [x] Garantir adaptação responsiva para dispositivos móveis.
-- [x] Aplicar "Data Storytelling" na apresentação dos dados.
-- [x] Desenvolver uma interface limpa e direta com alta legibilidade.
-- [x] Utilizar uma paleta de cores sóbria (tema "salão de troféus" / museu desportivo).
-- [x] Implementar navegação intuitiva.
+# Support.io - UX/UI Tasks
 
-## 2. Funcionalidades Principais (Features)
-- [x] F1: Análise de Domínio (Input Principal)
-- [x] F2: Exibição dos Resultados em Tempo Real
-- [x] F3: Visualização Detalhada dos Resultados
-- [x] F4: Histórico de Análises
-- [x] F5: Acesso Direto a uma Análise (Routing)
+## 🎨 Branding & Identity
+- [x] Implement new color scheme: Primary Blue (#2563EB), Secondary Gray (#6B7280), Accent Green (#10B981).
+- [x] Update typography to Inter or Roboto.
+- [x] Update logo to the new design.
 
-## 3. Experiência do Utilizador (UX)
-- [ ] UX1: Foco e Simplicidade
-- [ ] UX2: Rapidez e Feedback Imediato
-- [ ] UX3: Clareza e Legibilidade
-- [ ] UX4: Layout Responsivo (Desktop-First)
+## 🖥️ General UX Guidelines
+- [ ] Implement clean and intuitive navigation.
+- [ ] Implement consistent dark/light mode support.
+- [ ] Create a dashboard-like homepage with access to all main tools.
+- [ ] Use clear iconography for DNS Check, SSL Check, Load Tester, etc.
+- [ ] Ensure mobile responsiveness.
 
-## 4. Interface do Utilizador (UI)
-- [ ] UI1: Estética Moderna e "Técnica"
-- [ ] UI2: Tipografia
-- [ ] UI3: Componentes Visuais
+## 📑 Homepage
+- [ ] Add a brief introduction of Support.io as a technical support portal.
+- [ ] Implement a grid-based layout with cards for each tool (Load Tester, DNS Check, SSL Check).
+- [ ] Add a "Start Testing Now" CTA button.
+
+## ⚙️ Tool Pages
+- [ ] Implement simple input forms with inline feedback validation.
+- [ ] Visualize Load Tester results with charts (status codes, response times).
+- [ ] Visualize DNS Check results in a table view with DNS records.
+- [ ] Visualize SSL Check results with certificate details and expiration alerts.
+
+## 🌙 Dark Mode
+- [ ] Implement a dark theme with a contrast ratio > 4.5 (WCAG compliant).
+- [ ] Implement a smooth toggle between light and dark mode.
+
+## 📱 Responsiveness
+- [ ] Optimize for desktop, tablet, and mobile.
+- [ ] Use cards and accordion components for smaller screens.
+
+## 🔒 Accessibility
+- [ ] Add ARIA labels for forms and buttons.
+- [ ] Ensure keyboard navigability.
+- [ ] Implement proper focus states for all inputs and actions.
+
+## 🚀 Performance
+- [ ] Use lightweight UI components.
+- [ ] Implement lazy loading for heavy charts/data.
+- [ ] Ensure a fast feedback loop after requests.

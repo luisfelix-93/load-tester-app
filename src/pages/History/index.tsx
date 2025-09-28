@@ -7,18 +7,18 @@ export default function History() {
     // --- CORRIGIDO ---
     // O parâmetro na URL é 'target', para ser consistente com a API.
     // Usamos 'useParams' para extrair esse valor.
-    const { target } = useParams<{ target: string }>();
+    const { Target } = useParams<{ Target: string }>();
     const [loading, setLoading] = useState(true);
     const [history, setHistory] = useState<AnalysisResult[] | null>(null);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         // Usamos a variável 'target' que vem da URL
-        if (!target) return;
+        if (!Target) return;
 
         const fetchHistory = async () => {
             setLoading(true);
-            const response = await getHistoryByTarget(target);
+            const response = await getHistoryByTarget(Target);
             if (typeof response === 'string') {
                 setError(response);
             } else {
@@ -28,13 +28,13 @@ export default function History() {
         };
 
         fetchHistory();
-    }, [target]); // A dependência do useEffect agora é 'target'
+    }, [Target]); // A dependência do useEffect agora é 'target'
 
     return (
         <div className="container mx-auto p-4">
             <div className="text-center mb-8">
                 {/* Exibimos o 'target' no título */}
-                <h1 className="text-4xl font-bold text-primary">Histórico de Análise para {target}</h1>
+                <h1 className="text-4xl font-bold text-primary">Histórico de Análise para {Target}</h1>
             </div>
 
             {error && (
