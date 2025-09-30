@@ -87,51 +87,59 @@ export default function Teste () {
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className='flex items-center justify-between'>
-            <label className='text-sm font-medium'>Requisição POST?</label>
-            <Switch checked={isPost} onCheckedChange={handleToggleMethod} />
+            <label htmlFor='isPost' className='text-sm font-medium'>Requisição POST?</label>
+            <Switch id='isPost' checked={isPost} onCheckedChange={handleToggleMethod} aria-label="Ativar requisição POST" />
             </div>
             <div>
-            <label className="block text-sm font-medium mb-1">URL do Alvo</label>
+            <label htmlFor='targetUrl' className="block text-sm font-medium mb-1">URL do Alvo</label>
             <Input
+              id='targetUrl'
               type="text"
               name="targetUrl"
               value={formData.targetUrl}
               onChange={handleChange}
               required
+              aria-label="URL do alvo do teste de carga"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Número de Requisições</label>
+            <label htmlFor='numRequests' className="block text-sm font-medium mb-1">Número de Requisições</label>
             <Input
+              id='numRequests'
               type="number"
               name="numRequests"
               value={formData.numRequests}
               onChange={handleChange}
               required
+              aria-label="Número de requisições do teste de carga"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Concorrência</label>
+            <label htmlFor='concurrency' className="block text-sm font-medium mb-1">Concorrência</label>
             <Input
+              id='concurrency'
               type="number"
               name="concurrency"
               value={formData.concurrency}
               onChange={handleChange}
               required
+              aria-label="Concorrência do teste de carga"
             />
           </div>
           {isPost && (
             <div>
-              <label className="block text-sm font-medium mb-1">Payload (JSON)</label>
+              <label htmlFor='payload' className="block text-sm font-medium mb-1">Payload (JSON)</label>
               <Textarea
+                id='payload'
                 value={formData.payload as string}
                 onChange={handlePayloadChange}
                 placeholder='"{ \"key\": \"value\" }"'
                 rows={6}
+                aria-label="Payload JSON para requisições POST"
               />
             </div>
           )}
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full" aria-label="Iniciar teste de carga">
             Iniciar Teste
           </Button>
         </form>

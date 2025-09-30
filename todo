@@ -13,28 +13,28 @@
 - [x] Ensure mobile responsiveness.
 
 ## 📑 Homepage
-- [ ] Add a brief introduction of Support.io as a technical support portal.
+- [x] Add a brief introduction of Support.io as a technical support portal.
 - [x] Implement a grid-based layout with cards for each tool (Load Tester, DNS Check, SSL Check).
-- [ ] Add a "Start Testing Now" CTA button.
+- [x] Add a "Start Testing Now" CTA button.
 
 ## ⚙️ Tool Pages
 - [ ] Implement simple input forms with inline feedback validation.
-- [ ] Visualize Load Tester results with charts (status codes, response times).
-- [ ] Visualize DNS Check results in a table view with DNS records.
-- [ ] Visualize SSL Check results with certificate details and expiration alerts.
+- [x] Visualize Load Tester results with charts (status codes, response times).
+- [x] Visualize DNS Check results in a table view with DNS records.
+- [x] Visualize SSL Check results with certificate details and expiration alerts.
 
 ## 🌙 Dark Mode
-- [ ] Implement a dark theme with a contrast ratio > 4.5 (WCAG compliant).
-- [ ] Implement a smooth toggle between light and dark mode.
+- [x] Implement a dark theme with a contrast ratio > 4.5 (WCAG compliant).
+- [x] Implement a smooth toggle between light and dark mode.
 
 ## 📱 Responsiveness
 - [x] Optimize for desktop, tablet, and mobile.
-- [ ] Use cards and accordion components for smaller screens.
+- [x] Use cards and accordion components for smaller screens.
 
 ## 🔒 Accessibility
-- [ ] Add ARIA labels for forms and buttons.
-- [ ] Ensure keyboard navigability.
-- [ ] Implement proper focus states for all inputs and actions.
+- [x] Add ARIA labels for forms and buttons.
+- [x] Ensure keyboard navigability.
+- [x] Implement proper focus states for all inputs and actions.
 
 ## 🚀 Performance
 - [ ] Use lightweight UI components.
