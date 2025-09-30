@@ -40,7 +40,7 @@ export const analyzeUrl = async (targetUrl: string): Promise<AnalysisResult | st
             headers: {
                 'Content-Type': 'application/json'
             },
-            url: `/analyze`,
+            url: `/dns-cert/analyze`,
             data: {
                 target: targetUrl
             }
@@ -60,7 +60,7 @@ export const getAnalysisById = async (analysisId: string): Promise<AnalysisResul
     try {
         const options = {
             method: 'GET',
-            url: `/analysis/${analysisId}`
+            url: `/dns-cert/analysis/${analysisId}`
         }
         const response = await axios.request(options);
         if (response.status === 404) {
@@ -79,7 +79,7 @@ export const getHistoryByTarget = async (targetUrl: string): Promise<AnalysisRes
     try {
         const options = {
             method: 'GET',
-            url: `/history/${targetUrl}`
+            url: `/dns-cert/history/${targetUrl}`
         }
         const response = await axios.request(options);
         if (response.status === 404) {

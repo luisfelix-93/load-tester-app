@@ -6,15 +6,15 @@
 - [x] Update logo to the new design.
 
 ## 🖥️ General UX Guidelines
-- [ ] Implement clean and intuitive navigation.
-- [ ] Implement consistent dark/light mode support.
-- [ ] Create a dashboard-like homepage with access to all main tools.
-- [ ] Use clear iconography for DNS Check, SSL Check, Load Tester, etc.
-- [ ] Ensure mobile responsiveness.
+- [x] Implement clean and intuitive navigation.
+- [x] Implement consistent dark/light mode support.
+- [x] Create a dashboard-like homepage with access to all main tools.
+- [x] Use clear iconography for DNS Check, SSL Check, Load Tester, etc.
+- [x] Ensure mobile responsiveness.
 
 ## 📑 Homepage
 - [ ] Add a brief introduction of Support.io as a technical support portal.
-- [ ] Implement a grid-based layout with cards for each tool (Load Tester, DNS Check, SSL Check).
+- [x] Implement a grid-based layout with cards for each tool (Load Tester, DNS Check, SSL Check).
 - [ ] Add a "Start Testing Now" CTA button.
 
 ## ⚙️ Tool Pages
@@ -28,7 +28,7 @@
 - [ ] Implement a smooth toggle between light and dark mode.
 
 ## 📱 Responsiveness
-- [ ] Optimize for desktop, tablet, and mobile.
+- [x] Optimize for desktop, tablet, and mobile.
 - [ ] Use cards and accordion components for smaller screens.
 
 ## 🔒 Accessibility

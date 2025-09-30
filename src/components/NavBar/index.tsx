@@ -34,7 +34,8 @@ export default function Navbar() {
     <header className="w-full bg-card border-b shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <Link to="/">
-          <img src="/support_io.png" alt="support.io logo" className="h-20 w-auto" />
+                    <img src="/support_io.png" alt="support.io logo" className="h-20 w-auto dark:hidden" />
+          <img src="/support_io_white.png" alt="support.io logo" className="h-20 w-auto hidden dark:block" />
         </Link>
         <div className="hidden md:flex items-center space-x-4">
           <nav className="flex items-center space-x-4">
@@ -68,6 +69,10 @@ export default function Navbar() {
                   key={item.path}
                   to={item.path}
                   className={cn(
+                    "flex items-center text-sm font-medium px-3 py-2 rounded-md transition-colors",
+                    location.pathname === item.path
+                      ? "bg-primary text-primary-foreground"
+                      : "text-foreground hover:bg-muted hover:text-muted-foreground"
                   )}
                 >
                   {item.label}

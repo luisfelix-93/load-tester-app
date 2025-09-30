@@ -79,8 +79,7 @@ export default function ResponseTimeChart({ result }: Props) {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto mt-8">
-      <h2 className="text-xl font-bold mb-4">Tempo de Resposta por Requisição</h2>
+    <div className="w-full max-w-4xl mx-auto">
       <Line data={chartData} options={options} />
     </div>
   );
