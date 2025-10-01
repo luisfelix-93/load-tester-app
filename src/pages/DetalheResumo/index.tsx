@@ -1,14 +1,15 @@
 import { useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useEffect, useState, lazy, Suspense } from "react"
 import { getTestResults } from "@/api/loadtester"
 import { saveAs } from "file-saver"
 import { Button } from "@/components/ui/button"
-import ResumoSection from "@/components/ResumoSection"
-import StatusCodeChart from "@/components/StatusCodeChart"
-import ResponseTimeChart from "@/components/ResponseTimeChart"
 import { cn } from "@/lib/utils"
-import ResponseTimeHistogram from "@/components/ResponseTimeHistogram"
-import AverageTimeByStatusChart from "@/components/AverageTimeByStatusChart"
+import Loading from "@/components/Loading"
+
+const ResumoSection = lazy(() => import("@/components/ResumoSection"))
+const StatusCodeChart = lazy(() => import("@/components/StatusCodeChart"))
+const ResponseTimeChart = lazy(() => import("@/components/ResponseTimeChart"))
+const ResponseTimeHistogram = lazy(() => import("@/components/ResponseTimeHistogram"))
 
 export default function DetalheResumo() {
   const { testId } = useParams()
@@ -46,12 +47,14 @@ export default function DetalheResumo() {
         <div>
           <h2 className="text-3xl font-bold text-center mb-2">Visão Geral do Teste</h2>
           <p className="text-muted-foreground text-center mb-8">Um resumo do teste de carga executado.</p>
-          <ResumoSection
-            url={data.url}
-            requests={data.requests}
-            concurrency={data.concurrency}
-            stats={data.stats}
-          />
+          <Suspense fallback={<Loading />}>
+            <ResumoSection
+              url={data.url}
+              requests={data.requests}
+              concurrency={data.concurrency}
+              stats={data.stats}
+            />
+          </Suspense>
         </div>
       </section>
 
@@ -59,21 +62,27 @@ export default function DetalheResumo() {
       <section className="h-screen snap-start flex flex-col items-center justify-center px-4">
         <h2 className="text-3xl font-bold mb-2">Distribuição de Status Codes</h2>
         <p className="text-muted-foreground mb-8">Como a API respondeu a cada requisição.</p>
-        <StatusCodeChart result={data.result} />
+        <Suspense fallback={<Loading />}>
+          <StatusCodeChart result={data.result} />
+        </Suspense>
       </section>
 
       {/* Página 3: Gráfico de Tempo de Resposta */}
       <section className="h-screen snap-start flex flex-col items-center justify-center px-4">
         <h2 className="text-3xl font-bold mb-2">Linha do Tempo de Resposta</h2>
         <p className="text-muted-foreground mb-8">A variação do tempo de resposta ao longo do teste.</p>
-        <ResponseTimeChart result={data.result} />
+        <Suspense fallback={<Loading />}>
+          <ResponseTimeChart result={data.result} />
+        </Suspense>
       </section>
 
       {/* Página 4 */}
       <section className="h-screen snap-start flex flex-col items-center justify-center px-4">
         <h2 className="text-3xl font-bold mb-2">Histograma de Tempo de Resposta</h2>
         <p className="text-muted-foreground mb-8">A frequência dos tempos de resposta.</p>
-        <ResponseTimeHistogram result={data.result} />
+        <Suspense fallback={<Loading />}>
+          <ResponseTimeHistogram result={data.result} />
+        </Suspense>
       </section>
 
       {/* Exportar botão fixo */}

@@ -18,7 +18,7 @@
 - [x] Add a "Start Testing Now" CTA button.
 
 ## ⚙️ Tool Pages
-- [ ] Implement simple input forms with inline feedback validation.
+- [x] Implement simple input forms with inline feedback validation.
 - [x] Visualize Load Tester results with charts (status codes, response times).
 - [x] Visualize DNS Check results in a table view with DNS records.
 - [x] Visualize SSL Check results with certificate details and expiration alerts.
@@ -37,6 +37,6 @@
 - [x] Implement proper focus states for all inputs and actions.
 
 ## 🚀 Performance
-- [ ] Use lightweight UI components.
-- [ ] Implement lazy loading for heavy charts/data.
-- [ ] Ensure a fast feedback loop after requests.
+- [x] Use lightweight UI components.
+- [x] Implement lazy loading for heavy charts/data.
+- [x] Ensure a fast feedback loop after requests.

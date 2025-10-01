@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { useParams } from "react-router-dom";
 import { getAnalysisById, AnalysisResult } from "../../api/dnsCertAPI";
-import DnsResults from "../../components/DnsResults";
-import SslResults from "../../components/SslResults";
+import Loading from "@/components/Loading";
+
+const DnsResults = lazy(() => import("../../components/DnsResults"));
+const SslResults = lazy(() => import("../../components/SslResults"));
 
 export default function Analysis() {
     const { id } = useParams<{ id: string }>();
@@ -47,14 +49,15 @@ export default function Analysis() {
             )}
 
             {analysis && (
-                <div className="max-w-2xl mx-auto space-y-8">
-                    {/* --- CORRIGIDO --- */}
-                    {/* Apenas verificamos se o objeto existe */}
-                    {analysis.dns && <DnsResults dns={analysis.dns} />}
-                    {analysis.ssl && <SslResults ssl={analysis.ssl} />}
-                </div>
+                <Suspense fallback={<Loading />}>
+                    <div className="max-w-2xl mx-auto space-y-8">
+                        {/* --- CORRIGIDO --- */}
+                        {/* Apenas verificamos se o objeto existe */}
+                        {analysis.dns && <DnsResults dns={analysis.dns} />}
+                        {analysis.ssl && <SslResults ssl={analysis.ssl} />}
+                    </div>
+                </Suspense>
             )}
         </div>
     );
 }
-
