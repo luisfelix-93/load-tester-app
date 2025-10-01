@@ -1,41 +1,36 @@
-# 💫 Load Tester - Ferramenta de Teste de Carga
+# 💫 Load Tester - Ferramenta de Análise de Performance e Disponibilidade
 
-Este projeto é uma aplicação de teste de carga desenvolvida com **React**, **TypeScript**, **TailwindCSS** e **ShadCN UI** no frontend, e uma API em **Node.js**/**TypeScript** no backend.
+Este projeto é uma aplicação web desenvolvida com **React**, **TypeScript**, **TailwindCSS** e **ShadCN UI** no frontend, e uma API em **Node.js**/**TypeScript** no backend. 
 
-A ferramenta permite enviar um número configurável de requisições HTTP para uma URL alvo e visualizar estatísticas e gráficos de desempenho.
+A ferramenta permite realizar testes de carga, monitorar o status de APIs (health check) e verificar configurações de DNS e certificados SSL.
 
 ---
 
 ## ✨ Funcionalidades
 
-- Configuração personalizada de:
-  - URL alvo
-  - Número de requisições
-  - Nível de concorrência
-  - Método (GET/POST) e envio de payload JSON
-- Exibição de resultados:
-  - Número de sucessos e falhas
-  - Tempo total de resposta (mínimo, médio e máximo)
-  - Tempo para o primeiro e último byte
-- Gráficos:
-  - Status code por requisição (pizza)
-  - Tempo de resposta por requisição (linha)
-  - Histograma dos tempos de resposta
-  - Tempo médio por status code (barras)
-- Relatórios:
-  - Visualização interativa em páginas de relatório com rolagem vertical (snap)
-  - Exportação dos resultados como JSON
-  - Busca de relatórios por intervalo de datas
-  - Busca de relatórios por URL
-  - Deleção de relatórios de teste
-- Monitoramento de Health Check de APIs:
-  - Acompanhamento do status (Online/Offline) de endpoints configurados.
-  - Análise de tempos de resposta de health checks ao longo do tempo.
-  - Análise dos retornos da API em todo o monitoramento, com visualização dos logs em JSON.
-  - Páginas dedicadas para monitoramento geral e detalhes de cada endpoint.
-  - Deleção de endpoints de health check.
-- Interface responsiva e moderna com **TailwindCSS** + **ShadCN UI**:
-  - Suporte a **Modo Escuro (Dark Mode)** com seletor de tema.
+- **Teste de Carga**
+  - Configuração de URL, número de requisições, concorrência, método (GET/POST) e payload JSON.
+  - Visualização de estatísticas de sucesso/falha e tempos de resposta (mínimo, médio, máximo).
+  - Gráficos interativos: distribuição de status codes, linha do tempo de resposta, histograma e tempo médio por status.
+
+- **Monitoramento de Health Check**
+  - Cadastro de endpoints para monitoramento contínuo de disponibilidade.
+  - Relatórios de uptime e histórico de status.
+  - Gráficos de tempo de resposta ao longo do tempo.
+
+- **Verificador de DNS e SSL**
+  - Análise de registros DNS (A, AAAA, MX, TXT, NS) de qualquer domínio.
+  - Verificação de validade, expiração e detalhes do emissor de certificados SSL.
+
+- **Relatórios e Análise**
+  - Visualização interativa dos resultados dos testes.
+  - Exportação de relatórios de teste de carga em formato JSON.
+  - Histórico de testes com busca por data e URL.
+
+- **Interface e UX**
+  - Interface responsiva com suporte a **Modo Escuro (Dark Mode)**.
+  - Otimização de performance com **lazy loading** para componentes pesados.
+  - Design moderno e intuitivo, focado em "Data Storytelling" para facilitar a interpretação dos dados.
 
 ---
 
@@ -46,7 +41,8 @@ A ferramenta permite enviar um número configurável de requisições HTTP para 
   - TypeScript
   - TailwindCSS
   - ShadCN UI
-  - Axios (para chamadas HTTP)
+  - Radix UI (Accordion)
+  - Axios (chamadas HTTP)
   - React Router DOM (navegação)
   - Chart.js + react-chartjs-2 (gráficos)
   - FileSaver (exportação JSON)
@@ -55,7 +51,6 @@ A ferramenta permite enviar um número configurável de requisições HTTP para 
   - Node.js
   - TypeScript
   - Express
-  - Load testing engine próprio
 
 ---
 
@@ -85,32 +80,24 @@ Este projeto utiliza um gateway Nginx para gerenciar as requisições para as AP
 Para o desenvolvimento local, as APIs são acessadas através dos seguintes proxies:
 - `/load-test` -> `http://localhost:4000`
 - `/api` -> `http://localhost:5000`
+- `/dns-cert` -> `http://localhost:5001`
 
 ---
 
 ### 3. Rodar o Backend
 
-```bash
-cd backend
-npm install
-npm run dev
-```
-
-O backend será iniciado na porta `4000`.
+O projeto é composto por múltiplos serviços de backend. Certifique-se de iniciar todos eles conforme as instruções em seus respectivos diretórios.
 
 ---
 
 ### 4. Rodar o Frontend
 
-Em outra aba/terminal:
-
 ```bash
-cd load-tester-app
 npm install
 npm run dev
 ```
 
-O frontend será iniciado na porta `5173`.
+A aplicação frontend será iniciada na porta `5173`.
 
 ---
 
@@ -118,25 +105,20 @@ O frontend será iniciado na porta `5173`.
 
 ```
 src/
- ├── api/               # Serviços de chamada HTTP (ex: loadtester.ts)
- ├── components/        # Componentes reutilizáveis (Cards, Charts, Layout, etc.)
- │    ├── AverageTimeByStatusChart/
- │    ├── Layout/
- │    ├── LogDisplay/    # Exibe os logs de Health Check
- │    ├── NavBar/
- │    ├── ThemeProvider/ # Provedor de tema (Dark Mode)
+ ├── api/               # Serviços de chamada HTTP
+ ├── components/        # Componentes reutilizáveis
+ │    ├── DnsResults/    # Exibe resultados de DNS
+ │    ├── SslResults/    # Exibe resultados de SSL
+ │    ├── Loading/       # Componente de fallback para lazy loading
  │    └── ...
- ├── lib/               # Funções utilitárias (ex: utils.ts)
- ├── pages/             # Páginas principais do app
- │    ├── DetalheResumo/
- │    ├── Error/
- │    ├── HC-Details/    # Detalhes do Health Check de um endpoint
- │    ├── HC-Monitor/    # Monitoramento geral de Health Checks
- │    ├── Home/
- │    ├── Loading/
- │    ├── Relatorios/
- │    ├── Resumo/
- │    └── Teste/
+ ├── hooks/             # Hooks customizados (ex: use-media-query.ts)
+ ├── lib/               # Funções utilitárias
+ ├── pages/             # Páginas principais da aplicação
+ │    ├── Analysis/      # Página de resultados da análise de DNS/SSL
+ │    ├── DNS-Checker/   # Página para iniciar a verificação de DNS/SSL
+ │    ├── DetalheResumo/ # Detalhes de um teste de carga
+ │    ├── HC-Details/    # Detalhes de um endpoint de Health Check
+ │    └── ...
  ├── App.tsx            # Configuração de rotas
  └── main.tsx           # Ponto de entrada do app
 ```
@@ -145,14 +127,12 @@ src/
 
 ## 📈 Fluxo de Uso
 
-1. Acesse a página inicial.
-2. Informe a URL alvo, o número de requisições, concorrência, método (GET/POST) e payload (se POST).
-3. Inicie o teste.
-4. Veja o resumo dos resultados, incluindo gráficos de desempenho.
-5. Navegue pelos relatórios anteriores ou busque por intervalo de datas.
-6. Exporte os resultados como JSON, se desejar.
-7. Acesse a seção de Monitoramento de Health Check para acompanhar a disponibilidade das suas APIs.
-8. Alterne entre os temas Light e Dark no seletor de tema no canto superior direito.
+1.  Acesse a página inicial para ver as ferramentas disponíveis.
+2.  **Teste de Carga:** Configure os parâmetros e inicie um teste para analisar a performance de um endpoint.
+3.  **Monitoramento de Health Check:** Cadastre endpoints para acompanhar a disponibilidade de suas APIs.
+4.  **Verificador de DNS e SSL:** Insira um domínio para verificar suas configurações de DNS e o estado do certificado SSL.
+5.  Navegue pelos relatórios e resultados detalhados de cada ferramenta.
+6.  Alterne entre os temas Light e Dark conforme sua preferência.
 
 ---
 

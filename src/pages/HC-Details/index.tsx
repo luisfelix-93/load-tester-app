@@ -1,10 +1,11 @@
 import { Endpoint, getEndpointById, getLogsByEndpoint, HealthCheckLog, deleteEndpoint } from "@/api/healthcheck";
-import LogTimeChart from "@/components/LogTimeChart";
-import LogDisplay from "@/components/LogDisplay";
 import { Button } from "@/components/ui/button";
-
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Loading from "@/components/Loading";
+
+const LogTimeChart = lazy(() => import("@/components/LogTimeChart"));
+const LogDisplay = lazy(() => import("@/components/LogDisplay"));
 
 export default function HCDetails() {
     const { endpointId } = useParams<{ endpointId: string }>();
@@ -38,7 +39,7 @@ export default function HCDetails() {
             try {
                 await deleteEndpoint(endpointId);
                 alert("Endpoint deletado com sucesso!");
-                navigate('/hc-monitor');
+                navigate('/monitor');
             } catch (err) {
                 setError("Falha ao deletar o endpoint.");
                 console.error(err);
@@ -56,7 +57,7 @@ export default function HCDetails() {
         <div className="space-y-8">
             <div>
                 <button
-                    onClick={() => navigate('/hc-monitor')}
+                    onClick={() => navigate('/monitor')}
                     className="mb-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >
                     Retornar
@@ -74,12 +75,14 @@ export default function HCDetails() {
             </div>
 
             {logs.length > 0 ? (
-                <div className="flex flex-col gap-8 max-h-[70vh] overflow-y-auto pb-4">
-                    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-                        <LogTimeChart logs={logs} />
+                <Suspense fallback={<Loading />}>
+                    <div className="flex flex-col gap-8 max-h-[70vh] overflow-y-auto pb-4">
+                        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                            <LogTimeChart logs={logs} />
+                        </div>
+                        <LogDisplay logs={logs} />
                     </div>
-                    <LogDisplay logs={logs} />
-                </div>
+                </Suspense>
             ) : (
                 <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md text-center text-gray-500">
                     Ainda não há logs de monitoramento para este endpoint.

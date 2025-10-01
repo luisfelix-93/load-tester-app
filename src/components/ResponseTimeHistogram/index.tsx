@@ -66,8 +66,7 @@ export default function ResponseTimeHistogram({result, binSize = 100}: Props) {
     };
     
     return (
-        <div className="w-full max-w-4x1 mx-auto mt-8">
-            <h2 className="text-xl font-bold mb4">Distribuição dos Tempos de Resposta</h2>
+        <div className="w-full max-w-2xl mx-auto">
             <Bar data={chartData} options={options} />
         </div>
     );
