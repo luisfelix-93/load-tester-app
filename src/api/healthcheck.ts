@@ -12,14 +12,13 @@ export interface HealthCheckLog {
 }
 
 // Define a estrutura de um Endpoint, usando o tipo de log que acabamos de criar
-export interface Endpoint {
-  _id: string;
-  name: string;
-  url: string;
-  // Agora 'logs' é um array do tipo HealthCheckLog
-  logs: HealthCheckLog[]; 
-  createdAt: string;
-  updatedAt: string;
+export interface IEndpoint {
+    url: string;
+    name: string;
+    // Adicionamos os novos campos como opcionais
+    alertsEnabled?: boolean;
+    responseTimeThresholdMs?: number;
+    recipientEmail?: string;
 }
 
 export interface IEndpoint {

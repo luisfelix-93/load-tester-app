@@ -1,30 +1,38 @@
-import { getTestResults } from "@/api/loadtester";
+// src/pages/Loading/index.tsx
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom";
+import { socket } from "@/services/socket"; // Importe o socket
 
-export default function Loading () {
+export default function Loading() {
     const { testId } = useParams();
     const navigate = useNavigate();
 
     useEffect(() => {
-        const interval = setInterval(async () =>{
-            if (!testId) return;
-            const data = await getTestResults(testId);
-            // Verifica se 'data' é um objeto, não nulo, e se 'result' é um array com itens
-            if (typeof data === 'object' && data !== null && Array.isArray(data.result) && data.result.length > 0) {
-                clearInterval(interval);
+        // Função para lidar com a notificação
+        const handleTestCompletion = (data: { testId: string }) => {
+            // Verifica se a notificação é para o teste atual
+            if (data.testId === testId) {
+                // Redireciona o usuário para a página de resultados
                 navigate(`/resumo/${testId}`);
             }
-            // Se os dados não estiverem prontos ou houver um erro temporário, o polling continua
-        }, 2000); // Polling a cada 2 segundos
-        return () => clearInterval(interval);
+        };
+
+        // Começa a ouvir pelo evento
+        socket.on('push-notification', handleTestCompletion);
+
+        // Função de limpeza para remover o listener
+        return () => {
+            socket.off('push-notification', handleTestCompletion);
+        };
     }, [testId, navigate]);
-    return(
+
+    return (
         <div className="flex justify-center items-center h-screen">
-        <div className="text-center space-y-4">
-          <h1 className="text-2xl font-bold">Testando a aplicação...</h1>
-          <p>Estamos processando o teste. Isso pode levar alguns segundos.</p>
+            <div className="text-center space-y-4">
+                <h1 className="text-2xl font-bold">Processando seu teste...</h1>
+                <p>Você será redirecionado para os resultados assim que estiverem prontos.</p>
+                {/* Pode adicionar um spinner/loading visual aqui */}
+            </div>
         </div>
-      </div>
-    )
+    );
 }
