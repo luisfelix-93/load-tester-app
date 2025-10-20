@@ -2,31 +2,47 @@ import axios from "axios";
 
 export interface AnalysisResult {
     id: string;
-    Target: string;
-    Status: string;
-    CheckedAt: Date;
-    dns: DNS;
-    ssl: SSL;
+    target: string;
+    status: string;
+    checked_at: string; // Manter como string para evitar problemas de fuso horário
+    dns?: DNSResult;
+    ssl?: SSLResult;
+    headers?: HeaderResult;
+    blacklist?: BlacklistResult;
 }
 
-export interface DNS {
+// Estrutura para os resultados DNS
+export interface DNSResult {
     a?: string[];
     aaaa?: string[];
-    cname?: string[];
     mx?: string[];
-    ns?: string[];
     txt?: string[];
+    ns?: string[];
     error?: string;
 }
 
-export interface SSL {
+// Estrutura para os resultados do certificado SSL
+export interface SSLResult {
     is_valid: boolean;
     issued_to: string;
-    issued_by: String;
-    valid_from: Date;
-    valid_until: Date;
+    issued_by: string;
+    valid_from: string;
+    valid_until: string;
     days_remaining: number;
-    covered_domains: string[];
+    covered_domains?: string[];
+    error?: string;
+}
+
+// Estrutura para os resultados dos cabeçalhos HTTP
+export interface HeaderResult {
+    status_code: number;
+    headers: Record<string, string[]>;
+    error?: string;
+}
+
+export interface BlacklistResult {
+    is_listed: boolean;
+    listed_on: string[];
     error?: string;
 }
 
