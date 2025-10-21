@@ -12,18 +12,24 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
 
     return (
         <div 
-            className="fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center items-center"
+            // Fundo semi-transparente que cobre a tela
+            className="fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center"
             onClick={onClose}
         >
             {/* Painel do Modal */}
             <div
-                className="bg-white rounded-lg shadow-xl w-full max-w-md m-4 z-50"
-                onClick={(e) => e.stopPropagation()}
+                // CORREÇÕES AQUI:
+                // - Trocamos 'bg-white' por 'bg-card' que se adapta ao tema.
+                // - Adicionamos 'border' para uma borda sutil no modo escuro.
+                className="bg-card border rounded-lg shadow-xl w-full max-w-md m-4 z-50"
+                onClick={(e) => e.stopPropagation()} // Impede que o clique dentro do modal o feche
             >
-                {/* Cabeçal do Modal */}
+                {/* Cabeçalho do Modal */}
                 <div className="flex justify-between items-center border-b p-4">
-                    <h3 className="text-xl font-semibold text-gray-800">{title}</h3>
-                    <button onClick={onClose} className="text-gray-500 hover:text-gray-800 text-2x1">&times;</button>
+                    {/* Usando 'text-card-foreground' para o texto do título */}
+                    <h3 className="text-xl font-semibold text-card-foreground">{title}</h3>
+                    {/* Usando 'text-muted-foreground' para o botão de fechar */}
+                    <button onClick={onClose} className="text-muted-foreground hover:text-foreground text-2xl">&times;</button>
                 </div>
 
                 {/* Corpo do Modal */}
