@@ -1,4 +1,4 @@
-# 💫 Load Tester - Ferramenta de Análise de Performance e Disponibilidade
+# 💫 Support.io - Ferramenta de Análise de Performance, Disponibilidade e Segurança
 
 Este projeto é uma aplicação web desenvolvida com **React**, **TypeScript**, **TailwindCSS** e **ShadCN UI** no frontend, e uma API em **Node.js**/**TypeScript** no backend. 
 
@@ -17,15 +17,27 @@ A ferramenta permite realizar testes de carga, monitorar o status de APIs (healt
   - Cadastro de endpoints para monitoramento contínuo de disponibilidade.
   - Relatórios de uptime e histórico de status.
   - Gráficos de tempo de resposta ao longo do tempo.
+  - **Configuração de Alertas:** Defina limites de tempo de resposta e receba alertas por e-mail se um endpoint ficar lento ou indisponível.
 
 - **Verificador de DNS e SSL**
   - Análise de registros DNS (A, AAAA, MX, TXT, NS) de qualquer domínio.
   - Verificação de validade, expiração e detalhes do emissor de certificados SSL.
+  - **Análise de Segurança Avançada:**
+    - **Verificação de Blacklist (DNSBL):** Identifica se o IP de um domínio está em listas de spam.
+    - **Análise de Cabeçalhos HTTP:** Inspeciona cabeçalhos de resposta para avaliar configurações de segurança.
 
 - **Relatórios e Análise**
   - Visualização interativa dos resultados dos testes.
   - Exportação de relatórios de teste de carga em formato JSON.
   - Histórico de testes com busca por data e URL.
+
+- **Configuração de Alertas por E-mail (SMTP)**
+  - Página dedicada para configurar um servidor SMTP para o envio de e-mails de alerta.
+  - Validação da configuração através do envio de um e-mail de teste.
+
+- **Notificações em Tempo Real**
+  - Alertas instantâneos (toast notifications) sobre o status dos testes de carga (concluído ou falho) via WebSockets.
+  - Redirecionamento automático para a página de resultados após a conclusão de um teste.
 
 - **Interface e UX**
   - Interface responsiva com suporte a **Modo Escuro (Dark Mode)**.
@@ -46,6 +58,8 @@ A ferramenta permite realizar testes de carga, monitorar o status de APIs (healt
   - React Router DOM (navegação)
   - Chart.js + react-chartjs-2 (gráficos)
   - FileSaver (exportação JSON)
+  - Socket.io-client (notificações em tempo real)
+  - React Hot Toast (toast notifications)
 
 - **Backend**
   - Node.js
@@ -81,6 +95,7 @@ Para o desenvolvimento local, as APIs são acessadas através dos seguintes prox
 - `/load-test` -> `http://localhost:4000`
 - `/api` -> `http://localhost:5000`
 - `/dns-cert` -> `http://localhost:5001`
+- `/socket.io` -> `http://notification-svc:4004`
 
 ---
 
@@ -109,8 +124,11 @@ src/
  ├── components/        # Componentes reutilizáveis
  │    ├── DnsResults/    # Exibe resultados de DNS
  │    ├── SslResults/    # Exibe resultados de SSL
+ │    ├── HeaderResults/ # Exibe cabeçalhos HTTP
+ │    ├── BlacklistResults/ # Exibe resultados de blacklist
  │    ├── Loading/       # Componente de fallback para lazy loading
  │    └── ...
+ ├── context/           # Contextos React (ex: NotificationContext)
  ├── hooks/             # Hooks customizados (ex: use-media-query.ts)
  ├── lib/               # Funções utilitárias
  ├── pages/             # Páginas principais da aplicação
@@ -118,7 +136,9 @@ src/
  │    ├── DNS-Checker/   # Página para iniciar a verificação de DNS/SSL
  │    ├── DetalheResumo/ # Detalhes de um teste de carga
  │    ├── HC-Details/    # Detalhes de um endpoint de Health Check
+ │    ├── Settings/      # Página de configurações (SMTP)
  │    └── ...
+ ├── services/          # Serviços (ex: socket.ts)
  ├── App.tsx            # Configuração de rotas
  └── main.tsx           # Ponto de entrada do app
 ```
@@ -129,10 +149,11 @@ src/
 
 1.  Acesse a página inicial para ver as ferramentas disponíveis.
 2.  **Teste de Carga:** Configure os parâmetros e inicie um teste para analisar a performance de um endpoint.
-3.  **Monitoramento de Health Check:** Cadastre endpoints para acompanhar a disponibilidade de suas APIs.
-4.  **Verificador de DNS e SSL:** Insira um domínio para verificar suas configurações de DNS e o estado do certificado SSL.
-5.  Navegue pelos relatórios e resultados detalhados de cada ferramenta.
-6.  Alterne entre os temas Light e Dark conforme sua preferência.
+3.  **Monitoramento de Health Check:** Cadastre endpoints para acompanhar a disponibilidade de suas APIs e configure alertas por e-mail.
+4.  **Verificador de DNS e SSL:** Insira um domínio para verificar suas configurações de DNS, o estado do certificado SSL, status em blacklists e cabeçalhos HTTP.
+5.  **Configurações:** Acesse a página de configurações para definir suas credenciais de SMTP.
+6.  Navegue pelos relatórios e resultados detalhados de cada ferramenta.
+7.  Alterne entre os temas Light e Dark conforme sua preferência.
 
 ---
 
