@@ -50,7 +50,6 @@ export default function Home() {
                         <Button
                             onClick={() => navigate("/monitor")}
                             className="w-full max-w-xs text-lg mt-auto"
-                            variant="secondary"
                             aria-label="Acessar monitoramento de Health Check"
                         >
                             Acessar Monitoramento
@@ -71,7 +70,6 @@ export default function Home() {
                         <Button
                             onClick={() => navigate("/dns-checker")}
                             className="w-full max-w-xs text-lg mt-auto"
-                            variant="outline"
                             aria-label="Verificar DNS e SSL de um domínio"
                         >
                             Verificar Domínio
@@ -121,10 +119,7 @@ export default function Home() {
                             <li>✅ Gerenciamento fácil pelo dashboard</li>
                         </ul>
                         <Button
-                            onClick={() => navigate("/monitor")}
-                            className="w-full max-w-xs text-lg mt-auto"
-                            variant="secondary"
-                            aria-label="Acessar monitoramento de Health Check"
+                            onClick={() => navigate("/monitor")} className="w-full max-w-xs text-lg mt-auto" aria-label="Acessar monitoramento de Health Check"
                         >
                             Acessar Monitoramento
                         </Button>
@@ -142,16 +137,13 @@ export default function Home() {
                             <li>✅ Detalhes do emissor e domínios cobertos</li>
                         </ul>
                         <Button
-                            onClick={() => navigate("/dns-checker")}
-                            className="w-full max-w-xs text-lg mt-auto"
-                            variant="outline"
-                            aria-label="Verificar DNS e SSL de um domínio"
+                            onClick={() => navigate("/dns-checker")} className="w-full max-w-xs text-lg mt-auto" aria-label="Verificar DNS e SSL de um domínio"
                         >
                             Verificar Domínio
                         </Button>
                     </AccordionContent>
                 </AccordionItem>
-            </Accordion>
+            </Accordion>x
         </div>
     );
 }
