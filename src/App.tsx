@@ -12,6 +12,7 @@ import HCDetails from "./pages/HC-Details";
 import DNSChecker from "./pages/DNS-Checker";
 import Analysis from "./pages/Analysis";
 import History from "./pages/History";
+import Settings from "./pages/Settings";
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="dns-checker" element={<DNSChecker />} />
           <Route path="analysis/:id" element={<Analysis />} />
           <Route path="history/:domain" element={<History />} />
+          <Route path="settings_smtp" element={<Settings />} />
         </Route>
       </Routes>
     </Router>
